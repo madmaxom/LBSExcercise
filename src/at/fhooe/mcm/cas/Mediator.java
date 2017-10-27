@@ -1,48 +1,31 @@
 package at.fhooe.mcm.cas;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.Panel;
+
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Mediator implements IMediator, WindowListener{
+import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
+
+public class Mediator implements IMediator, WindowListener, CommunicationObserver{
 	private Set<IComponent> iset = new HashSet<>();
+	private TabbedPanel mTabbedPanel;
 	
-	public Mediator() {
-		
+	public Mediator(TabbedPanel tp) {
+		mTabbedPanel = tp;
 	}
-	
+
 	public void register(IComponent icomp) {
 		iset.add(icomp);
+		mTabbedPanel.insertPanel(icomp);
 	}
 	
 	public void unregister(IComponent icomp) {
 		iset.remove(icomp);
+		mTabbedPanel.removePanel(icomp);
 	}
-	
-	public void sendGeoObject(GeoObject geoObject){
-		for(IComponent ic : iset) {
-			ic.onGeoObjectUpdated(geoObject);
-		}
-	}
-	
-	public void sendContextElement(ContextElement contextElement){
-		for(IComponent ic : iset) {
-			ic.onContextElementUpdated(contextElement);
-		}
-	}
-	
-	public void sendContextSituation(ContextSituation contextSituation){
-		for(IComponent ic : iset) {
-			ic.onContextSituationUpdated(contextSituation);
-		}
-	}
+
 
 	@Override
 	public void windowActivated(WindowEvent arg0) {
@@ -82,6 +65,24 @@ public class Mediator implements IMediator, WindowListener{
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGeoObjectUpdated(GeoObject geoObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onContextSituationUpdated(ContextSituation contextSituation) {
 		// TODO Auto-generated method stub
 		
 	}
