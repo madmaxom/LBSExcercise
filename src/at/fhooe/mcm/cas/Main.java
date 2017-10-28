@@ -19,9 +19,11 @@ public class Main {
 		// init components
 		IComponent gisComponent = new GISComponent();
 		IComponent gpsComponent = new GPSComponent();
+		IComponent poiComponent = new POIComponent();
 		
 		// register components to mediator
 		mediator.register(gisComponent);
 		mediator.register(gpsComponent);
+		mediator.register(poiComponent);
 	}
 }
