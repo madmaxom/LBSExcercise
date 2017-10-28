@@ -9,16 +9,14 @@ import at.fhooe.mcm.cas.gis.GISView;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 
 
-public class GISComponent implements IComponent, CommunicationObserver {
+public class GISComponent extends IComponent implements CommunicationObserver {
 
 	private Panel mPanel;
-	private String mName;
-	
-	
-	
-	public GISComponent() {
-		mName = "Map";
-	
+
+
+	public GISComponent(IMediator mediator, String name) {
+		super(mediator, name);
+			
 		GISModel m = new GISModel();
 		GISController c = new GISController(m);
 		GISView v = new GISView(c);
@@ -30,11 +28,6 @@ public class GISComponent implements IComponent, CommunicationObserver {
 	@Override
 	public Panel getView() {
 		return mPanel;
-	}
-
-	@Override
-	public String getName() {
-		return mName;
 	}
 
 	@Override

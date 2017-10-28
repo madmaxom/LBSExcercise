@@ -14,12 +14,12 @@ public class Main {
         tp.setVisible(true);
         
         // mediator, holding all components
-		Mediator mediator = new Mediator(tp);
+		IMediator mediator = new Mediator(tp);
 		
 		// init components
-		IComponent gisComponent = new GISComponent();
-		IComponent gpsComponent = new GPSComponent();
-		IComponent poiComponent = new POIComponent();
+		IComponent gisComponent = new GISComponent(mediator, "Map");
+		IComponent gpsComponent = new GPSComponent(mediator, "GPS");
+		IComponent poiComponent = new POIComponent(mediator, "POI");
 		
 		// register components to mediator
 		mediator.register(gisComponent);

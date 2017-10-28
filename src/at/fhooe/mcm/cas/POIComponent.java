@@ -4,13 +4,12 @@ import java.awt.Panel;
 
 import at.fhooe.mcm.cas.poi.POIView;
 
-public class POIComponent implements IComponent {
+public class POIComponent extends IComponent {
 
-	private String mName;
 	private Panel mPanel;
 	
-	public POIComponent() {
-		mName = "POI";
+	public POIComponent(IMediator mediator, String name) {
+		super(mediator, name);
 		
 		POIView v = new POIView();
 		mPanel = v.getPanel();
@@ -19,11 +18,6 @@ public class POIComponent implements IComponent {
 	@Override
 	public Panel getView() {
 		return mPanel;
-	}
-
-	@Override
-	public String getName() {
-		return mName;
 	}
 
 }

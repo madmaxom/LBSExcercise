@@ -8,17 +8,16 @@ import at.fhooe.mcm.cas.gps.GPSReceiverView;
 import at.fhooe.mcm.cas.gps.NMEAParser;
 import at.fhooe.mcm.cas.gps.PositionUpdateListener;
 
-public class GPSComponent implements IComponent {
+public class GPSComponent extends IComponent {
 
-	private String mName;
 	private static final String FILENAME = "logs/GPS-Log-I.log";
 	private static final int SLEEP = 100; // half a second
 	private static final String FILTER = "GGA";
 	
 	private Panel mPanel;
 	
-	public GPSComponent() {
-		mName = "GPS";
+	public GPSComponent(IMediator mediator, String name) {
+		super(mediator, name);
 		
 		GPSReceiverController c = new GPSReceiverController();
 		GPSReceiverView v = new GPSReceiverView(c);
@@ -49,9 +48,5 @@ public class GPSComponent implements IComponent {
 		return mPanel;
 	}
 
-	@Override
-	public String getName() {
-		return mName;
-	}
 
 }
