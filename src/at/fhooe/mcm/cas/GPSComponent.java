@@ -25,7 +25,6 @@ public class GPSComponent extends IComponent {
 		mPanel = v.getPanel();
 		
 		// TODO: uncomment
-		/*
 		try {
 			// initialize receiver
 			GPSReceiverSim sim = new GPSReceiverSim(FILENAME, SLEEP, FILTER);
@@ -34,12 +33,11 @@ public class GPSComponent extends IComponent {
 			parser.addObserver((PositionUpdateListener) v); 
 			
 			// start parsing
-			parser.run();
+			new Thread(parser).start();
 			
 		} catch (Exception _e) {
 			_e.printStackTrace();
 		}
-		*/
 	}
 	
 	
