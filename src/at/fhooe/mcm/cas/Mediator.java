@@ -97,7 +97,7 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 	}
 
 	@Override
-	public void notifyComponents(ContextElement contextElement, GISComponent origin) {
+	public void notifyComponents(ContextElement contextElement, IComponent origin) {
 		for(IComponent icomp: iset) {
 			if(!icomp.getName().equals(origin.getName())) {
 				icomp.onContextElementUpdated(contextElement);
@@ -106,7 +106,7 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 	}
 
 	@Override
-	public void notifyComponents(ContextSituation contextSituation, GISComponent origin) {
+	public void notifyComponents(ContextSituation contextSituation, IComponent origin) {
 		for(IComponent icomp: iset) {
 			if(!icomp.getName().equals(origin.getName())) {
 				icomp.onContextSituationUpdated(contextSituation);

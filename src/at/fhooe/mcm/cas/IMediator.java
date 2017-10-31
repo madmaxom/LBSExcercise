@@ -8,7 +8,7 @@ public interface IMediator {
 	public void register(IComponent icomp);
 	public void unregister(IComponent icomp);
 	public void notifyComponents(GeoObject geoObject, IComponent origin);
-	public void notifyComponents(ContextElement contextElement, GISComponent origin);
-	public void notifyComponents(ContextSituation contextSituation, GISComponent origin);
+	public void notifyComponents(ContextElement contextElement, IComponent origin);
+	public void notifyComponents(ContextSituation contextSituation, IComponent origin);
 
 }

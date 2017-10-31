@@ -50,7 +50,7 @@ public class GISComponent extends IComponent {
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
-		
+		//location of gps component is received
 	}
 
 	@Override

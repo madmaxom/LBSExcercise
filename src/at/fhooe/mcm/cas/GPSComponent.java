@@ -6,10 +6,11 @@ import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gps.GPSReceiverController;
 import at.fhooe.mcm.cas.gps.GPSReceiverSim;
 import at.fhooe.mcm.cas.gps.GPSReceiverView;
+import at.fhooe.mcm.cas.gps.NMEAInfo;
 import at.fhooe.mcm.cas.gps.NMEAParser;
 import at.fhooe.mcm.cas.gps.PositionUpdateListener;
 
-public class GPSComponent extends IComponent implements CommunicationObserver {
+public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
 	private static final String FILENAME = "logs/GPS-Log-I.log";
 	private static final int SLEEP = 100; // half a second
@@ -31,7 +32,8 @@ public class GPSComponent extends IComponent implements CommunicationObserver {
 			GPSReceiverSim sim = new GPSReceiverSim(FILENAME, SLEEP, FILTER);
 			NMEAParser parser = new NMEAParser(sim);
 			
-			parser.addObserver((PositionUpdateListener) v); 
+			parser.addObserver((PositionUpdateListener) v);
+			parser.addObserver((PositionUpdateListener) this);
 			
 			// start parsing
 			new Thread(parser).start();
@@ -66,6 +68,12 @@ public class GPSComponent extends IComponent implements CommunicationObserver {
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void updatePosition(NMEAInfo _info) {
+		super.mMediator.notifyComponents(new ContextElement(_info.getLat(), _info.getLng()), this);	
 	}
 
 }
