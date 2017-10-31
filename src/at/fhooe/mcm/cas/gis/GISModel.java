@@ -298,8 +298,8 @@ public class GISModel {
 		try {
 			// Load the JDBC driver and establish connection
 			Class.forName("org.postgresql.Driver");
-			String url = "jdbc:postgresql://localhost:5432/osm_austria"; // osm_hawai, osm_faroe_island, osm_austria
-			conn = DriverManager.getConnection(url, "geo", "geo");
+			String url = "jdbc:postgresql://localhost:5432/osm"; // osm_hawai, osm_faroe_island, osm_austria
+			conn = DriverManager.getConnection(url, "admin", "admin");
 			
 			// Add the geometry types to the connection
 			PGConnection c = (PGConnection) conn;

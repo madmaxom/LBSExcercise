@@ -86,5 +86,32 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void notifyComponents(GeoObject geoObject, IComponent origin) {
+		for(IComponent icomp: iset) {
+			if(!icomp.getName().equals(origin.getName())) {
+				icomp.onGeoObjectUpdated(geoObject);
+			}
+		}
+	}
+
+	@Override
+	public void notifyComponents(ContextElement contextElement, GISComponent origin) {
+		for(IComponent icomp: iset) {
+			if(!icomp.getName().equals(origin.getName())) {
+				icomp.onContextElementUpdated(contextElement);
+			}
+		}
+	}
+
+	@Override
+	public void notifyComponents(ContextSituation contextSituation, GISComponent origin) {
+		for(IComponent icomp: iset) {
+			if(!icomp.getName().equals(origin.getName())) {
+				icomp.onContextSituationUpdated(contextSituation);
+			}
+		}
+	}
 }
 

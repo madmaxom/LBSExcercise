@@ -9,44 +9,53 @@ import at.fhooe.mcm.cas.gis.GISView;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 
 
-public class GISComponent extends IComponent implements CommunicationObserver {
+public class GISComponent extends IComponent {
 
 	private Panel mPanel;
-
+	private GISModel mGISModel;
 
 	public GISComponent(IMediator mediator, String name) {
 		super(mediator, name);
 			
-		GISModel m = new GISModel();
-		GISController c = new GISController(m);
+		mGISModel = new GISModel();
+		GISController c = new GISController(mGISModel);
 		GISView v = new GISView(c);
 		mPanel = v.getPanel();
 		c.addView(v);
-		m.addObserver(v);
+		mGISModel.addObserver(v);
 	}
 	
 	@Override
 	public Panel getView() {
 		return mPanel;
 	}
+	
+	public void updateComponents(GeoObject geoObject) {
+		super.mMediator.notifyComponents(geoObject, this);
+	}
+	
+	public void updateComponents(ContextElement contextElement) {
+		super.mMediator.notifyComponents(contextElement, this);
+	}
+	
+	public void updateComponents(ContextSituation contextSituation) {
+		super.mMediator.notifyComponents(contextSituation, this);
+	}
+	
 
 	@Override
 	public void onGeoObjectUpdated(GeoObject geoObject) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
-		// TODO Auto-generated method stub
+		
 	}
-
-	
 
 }

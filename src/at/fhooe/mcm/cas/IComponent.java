@@ -2,9 +2,9 @@ package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
 
-public abstract class IComponent {
+public abstract class IComponent implements CommunicationObserver {
 	
-	private IMediator mMediator;
+	public IMediator mMediator;
 	private String mName;
 	
 	public IComponent(IMediator mediator, String name) {
@@ -16,7 +16,6 @@ public abstract class IComponent {
 		return mName;
 	}
 	
-	
 	public abstract Panel getView();
-
+	
 }

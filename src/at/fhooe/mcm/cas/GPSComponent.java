@@ -2,13 +2,14 @@ package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
 
+import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gps.GPSReceiverController;
 import at.fhooe.mcm.cas.gps.GPSReceiverSim;
 import at.fhooe.mcm.cas.gps.GPSReceiverView;
 import at.fhooe.mcm.cas.gps.NMEAParser;
 import at.fhooe.mcm.cas.gps.PositionUpdateListener;
 
-public class GPSComponent extends IComponent {
+public class GPSComponent extends IComponent implements CommunicationObserver {
 
 	private static final String FILENAME = "logs/GPS-Log-I.log";
 	private static final int SLEEP = 100; // half a second
@@ -46,5 +47,25 @@ public class GPSComponent extends IComponent {
 		return mPanel;
 	}
 
+
+	@Override
+	public void onGeoObjectUpdated(GeoObject geoObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onContextSituationUpdated(ContextSituation contextSituation) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

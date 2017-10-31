@@ -2,6 +2,7 @@ package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
 
+import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.poi.POIView;
 
 public class POIComponent extends IComponent {
@@ -18,6 +19,21 @@ public class POIComponent extends IComponent {
 	@Override
 	public Panel getView() {
 		return mPanel;
+	}
+
+	@Override
+	public void onGeoObjectUpdated(GeoObject geoObject) {
+		
+	}
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		
+	}
+
+	@Override
+	public void onContextSituationUpdated(ContextSituation contextSituation) {
+		
 	}
 
 }
