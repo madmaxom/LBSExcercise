@@ -45,7 +45,7 @@ public class GISComponent extends IComponent {
 
 	@Override
 	public void onGeoObjectUpdated(GeoObject geoObject) {
-		
+		mGISModel.addGeoObject(geoObject);
 	}
 
 	@Override

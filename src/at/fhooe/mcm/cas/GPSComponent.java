@@ -1,6 +1,14 @@
 package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import org.postgis.PGgeometry;
+import org.postgresql.PGConnection;
+import org.postgresql.util.PGobject;
 
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gps.GPSReceiverController;
@@ -73,7 +81,41 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 
 	@Override
 	public void updatePosition(NMEAInfo _info) {
-		super.mMediator.notifyComponents(new ContextElement(_info.getLat(), _info.getLng()), this);	
+		Connection conn;
+		try {
+			// Load the JDBC driver and establish connection
+			Class.forName("org.postgresql.Driver");
+			String url = "jdbc:postgresql://localhost:5432/osm_austria"; // osm_hawai, osm_faroe_island, osm_austria
+			conn = DriverManager.getConnection(url, "geo", "geo");
+			
+			// Add the geometry types to the connection
+			PGConnection c = (PGConnection) conn;
+			c.addDataType("geometry", (Class<? extends PGobject>) Class.forName("org.postgis.PGgeometry"));
+			c.addDataType("box2d", (Class<? extends PGobject>) Class.forName("org.postgis.PGbox2d"));
+	
+			// create statement and execute a select query
+			Statement s = conn.createStatement();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT ST_Transform(ST_SetSRID(ST_MakePoint(");
+			query.append(_info.getLat());
+			query.append(", ");
+			query.append(_info.getLng());
+			query.append("), 4326), 3857);");
+			
+			ResultSet r = s.executeQuery(query.toString());
+			r.next();
+			PGgeometry geom = (PGgeometry) r.getObject("st_transform");
+			String wkt = geom.toString();
+			org.postgis.Point pt = new org.postgis.Point(wkt);
+			
+			// close connections
+			s.close();
+			conn.close();
+			super.mMediator.notifyComponents(new ContextElement(_info.getLat(), _info.getLng()), this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -332,7 +332,7 @@ public class GISModel {
 			createGeoObjects(r);
 			
 			// TODO: uncomment to get all data
-			/*
+//			/*
 			// residential, industrial, commercial, forest, meadow
 			r = s.executeQuery("SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002, 5003, 5004, 5006)" + sqlEnvelope + ";");
 			createGeoObjects(r);
@@ -349,7 +349,7 @@ public class GISModel {
 			r = s.executeQuery("SELECT * FROM natural_line AS a WHERE a.type IN (6001, 6002, 6005);" + sqlEnvelope + ";");
 			createGeoObjects(r);
 			
-			*/
+//			*/
 				
 			// close connections
 			s.close();
@@ -566,5 +566,11 @@ public class GISModel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void addGeoObject(GeoObject geoObject) {
+		mOrigGeoObjects.add(geoObject);
+		drawAllGeoObjects();
+		notifyObservers();
 	}
 }
