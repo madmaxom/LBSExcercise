@@ -2,8 +2,8 @@ package at.fhooe.mcm.cas.aal.parser;
 
 import java.util.List;
 
-import at.fhooe.mcm.cas.aal.ContextElement;
+import at.fhooe.mcm.cas.aal.ContextElementTest;
 
 public interface IContextParser {
-	List<ContextElement> parse(String context);
+	List<ContextElementTest> parse(String context);
 }

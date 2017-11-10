@@ -16,15 +16,15 @@ import org.xml.sax.SAXException;
 
 import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
-import at.fhooe.mcm.cas.aal.ContextElement;
+import at.fhooe.mcm.cas.aal.ContextElementTest;
 
 public class DOMContextParser implements IContextParser {
 
 	
 	
 	@Override
-	public List<ContextElement> parse(String context) {
-		List<ContextElement> elements = new ArrayList<ContextElement>();
+	public List<ContextElementTest> parse(String context) {
+		List<ContextElementTest> elements = new ArrayList<ContextElementTest>();
 		
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(context.getBytes()), "UTF-8");
@@ -35,7 +35,7 @@ public class DOMContextParser implements IContextParser {
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
-				ContextElement elem = new ContextElement();
+				ContextElementTest elem = new ContextElementTest();
 				Node nNode = nList.item(temp);
 
 				System.out.println("\nCurrent Element :" + nNode.getNodeName());

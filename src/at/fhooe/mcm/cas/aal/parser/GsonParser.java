@@ -8,13 +8,13 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import at.fhooe.mcm.cas.aal.ContextElement;
+import at.fhooe.mcm.cas.aal.ContextElementTest;
 
 public class GsonParser implements IContextParser {
 
 	@Override
-	public List<ContextElement> parse(String context) {
-		List<ContextElement> elements = new ArrayList<ContextElement>();
+	public List<ContextElementTest> parse(String context) {
+		List<ContextElementTest> elements = new ArrayList<ContextElementTest>();
 		
 		Gson gson = new Gson();
 		
@@ -25,8 +25,8 @@ public class GsonParser implements IContextParser {
 		
 		// collection
 		String json = "[{\"s1\":\"1\",\"s2\":\"2\"}, {\"s1\":\"3\",\"s2\":\"4\"}]";
-		Type collectionType = new TypeToken<Collection<ContextElement>>(){}.getType();
-		Collection<ContextElement> objList = gson.fromJson(json, collectionType);
+		Type collectionType = new TypeToken<Collection<ContextElementTest>>(){}.getType();
+		Collection<ContextElementTest> objList = gson.fromJson(json, collectionType);
 		elements.addAll(objList);
 
 

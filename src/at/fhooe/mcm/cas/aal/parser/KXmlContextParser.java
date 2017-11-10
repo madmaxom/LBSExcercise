@@ -11,15 +11,15 @@ import org.kxml2.kdom.Document;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import at.fhooe.mcm.cas.aal.ContextElement;
+import at.fhooe.mcm.cas.aal.ContextElementTest;
 
 public class KXmlContextParser implements IContextParser {
 
 
 
 	@Override
-	public List<ContextElement> parse(String context) {
-		List<ContextElement> elements = new ArrayList<ContextElement>();
+	public List<ContextElementTest> parse(String context) {
+		List<ContextElementTest> elements = new ArrayList<ContextElementTest>();
 		
 		try {
 			
@@ -30,7 +30,7 @@ public class KXmlContextParser implements IContextParser {
 		    parser.nextTag();
 		    parser.require(XmlPullParser.START_TAG, null, "Elements");
 		    while (parser.nextTag() == XmlPullParser.START_TAG) {
-		    	ContextElement elem = new ContextElement();
+		    	ContextElementTest elem = new ContextElementTest();
 		    	
 		    	parser.require(XmlPullParser.START_TAG, null, "ContextElement");
 
