@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (http://www.altova.com) by Aigerim (fhooe) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="contextELement">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="contextId" type="xs:int"/>
+				<xs:element name="contextKey" type="xs:string"/>
+				<xs:element name="contextValue"/>
+				<xs:element name="contextMetaData" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="valueType"/>
+							<xs:element name="dynamics"/>
+							<xs:element name="originator" type="xs:string"/>
+							<xs:element name="positionInfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="position"/>
+										<xs:element name="validityArea"/>
+										<xs:element name="relevanceFct"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="temporalInfo" type="xs:dateTime"/>
+							<xs:element name="security">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="trustWorthiness"/>
+										<xs:element name="accessRights"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="sourceType" type="xs:string"/>
+							<xs:element name="version" type="xs:string"/>
+							<xs:element name="description" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextELement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="contextDataModel.xsd">
+	<contextId/>
+	<contextKey/>
+	<contextValue/>
+	<contextMetaData>
+		<valueType/>
+		<dynamics/>
+		<originator/>
+		<positionInfo>
+			<position/>
+			<validityArea/>
+			<relevanceFct/>
+		</positionInfo>
+		<temporalInfo>
+			<creationDate/>
+			<deletionDate/>
+			<relevanceFct/>
+		</temporalInfo>
+		<security>
+			<trustWorthiness/>
+			<accessRights/>
+		</security>
+		<sourceType/>
+		<version/>
+		<description/>
+	</contextMetaData>
+</contextELement>
