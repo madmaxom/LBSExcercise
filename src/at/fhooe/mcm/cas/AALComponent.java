@@ -1,9 +1,14 @@
 package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 import at.fhooe.mcm.cas.aal.parser.IContextParser;
-import at.fhooe.mcm.cas.aal.parser.KXmlContextParser;
 import at.fhooe.mcm.cas.aal.parserfactory.DOMParserFactory;
 import at.fhooe.mcm.cas.aal.parserfactory.GsonParserFactory;
 import at.fhooe.mcm.cas.aal.parserfactory.IParserFactory;
@@ -25,7 +30,24 @@ public class AALComponent extends IComponent {
 	public AALComponent(IMediator mediator, String name,  ParserMode mode) {
 		super(mediator, name);
 		
-		mode = ParserMode.JSON;
+		
+		// TODO: outsource
+		String destinationPath = new File("src/at/fhooe/mcm/cas/XML").getAbsolutePath();
+		Path path = FileSystems.getDefault().getPath(destinationPath, "position.xml");
+		
+		System.out.println(path.toAbsolutePath());
+		String context = null;
+		try {
+			context = new String(Files.readAllBytes(path.toAbsolutePath()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		
+		
+		
+		
 		// create a concrete factory for producing a parser
 		IParserFactory factory = null;
 		switch (mode) {
@@ -39,9 +61,7 @@ public class AALComponent extends IComponent {
 		
 		mParser = factory.createParser();
 		
-		// xml sample for testing only, providing two ContextElement objects
-		String context = "<Elements><ContextElement><s1>1</s1><s2>2</s2></ContextElement><ContextElement><s1>3</s1><s2>4</s2></ContextElement></Elements>";
-		mParser.parse(context);
+		List<at.fhooe.mcm.cas.contexttype.ContextElement> elements = mParser.parse(context);
 	}
 
 	@Override
