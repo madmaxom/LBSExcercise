@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2018 (http://www.altova.com) by Aigerim (fhooe) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:element name="contextELement">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2018 (http://www.altova.com) by Aigerim (fhooe) --><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:element name="contextElement">
 		<xs:annotation>
 			<xs:documentation>Comment describing your root element</xs:documentation>
 		</xs:annotation>
@@ -10,7 +9,7 @@
 				<xs:element name="contextId" type="xs:int"/>
 				<xs:element name="contextKey" type="xs:string"/>
 				<xs:element name="contextValue"/>
-				<xs:element name="contextMetaData" minOccurs="0">
+				<xs:element minOccurs="0" name="contextMetaData">
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="valueType"/>
