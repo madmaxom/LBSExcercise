@@ -1,6 +1,6 @@
 package at.fhooe.mcm.cas.contexttype;
 
-public class ContextTemperature {
+public class ContextTemperature extends ContextElement {
     private int temperature = 0;
 
     public int getTemperature() {
@@ -11,6 +11,10 @@ public class ContextTemperature {
         this.temperature = temperature;
     }
 
+    public ContextTemperature() {
+    	
+    }
+    
     public ContextTemperature(int temperature) {
 
         this.temperature = temperature;

@@ -7,6 +7,10 @@ public abstract class ContextElement {
     private String type = "";
     private ContextMetaData contextMetaData = null;
 
+    public ContextElement() {
+    	
+    }
+    
     public ContextElement(int id, String key, String type, ContextMetaData contextMetaData) {
         this.id = id;
         this.key = key;

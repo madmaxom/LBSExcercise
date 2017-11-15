@@ -1,12 +1,16 @@
 package at.fhooe.mcm.cas.contexttype;
 
-public class ContextTimeOfTheDay {
+public class ContextTimeOfTheDay extends ContextElement {
     private int hour = 0;
     private int minuts = 0;
     private int year = 0;
     private int month = 0;
     private int day = 0;
 
+    public ContextTimeOfTheDay() {
+    	
+    }
+    
     public ContextTimeOfTheDay(int hour, int minuts, int year, int month, int day) {
         this.hour = hour;
         this.minuts = minuts;

@@ -1,8 +1,12 @@
 package at.fhooe.mcm.cas.contexttype;
 
-public class ContextFuel {
+public class ContextFuel extends ContextElement {
     private int fuelStatus = 0;
 
+    public ContextFuel() {
+    	
+    }
+    
     public ContextFuel(int fuelStatus) {
         this.fuelStatus = fuelStatus;
     }
