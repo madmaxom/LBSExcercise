@@ -1,5 +1,5 @@
 {
-  "contextELement": {
+  "contextElement": {
     "contextId": "100",
     "contextKey": "temperature",
     "contextValue": { "temperature": "15" }
