@@ -32,7 +32,7 @@ public class AALComponent extends IComponent {
 		
 		
 		// TODO: outsource
-		String destinationPath = new File("src/at/fhooe/mcm/cas/XML").getAbsolutePath();
+		String destinationPath = new File("files/XML").getAbsolutePath();
 		Path path = FileSystems.getDefault().getPath(destinationPath, "position.xml");
 		
 		System.out.println(path.toAbsolutePath());

@@ -1,0 +1,11 @@
+{
+  "contextElement": {
+    "contextId": "100",
+    "contextKey": "position",
+    "contextValue": {
+      "coordinateType": "GaussKrueger",
+      "xValue": "354763295",
+      "yValue": "580666584"
+    }
+  }
+}
