@@ -1,4 +1,4 @@
-package at.fhooe.mcm.cas;
+package at.fhooe.mcm.cas.contexttype;
 
 import java.util.Date;
 

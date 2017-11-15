@@ -1,4 +1,4 @@
-package at.fhooe.mcm.cas;
+package at.fhooe.mcm.cas.contexttype;
 
 public class ContextFuel {
     private int fuelStatus = 0;

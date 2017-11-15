@@ -1,4 +1,5 @@
-package at.fhooe.mcm.cas;
+package at.fhooe.mcm.cas.contexttype;
+
 
 public abstract class ContextElement {
     private int id = 0;

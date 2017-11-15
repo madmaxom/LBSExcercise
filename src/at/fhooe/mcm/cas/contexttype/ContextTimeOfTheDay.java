@@ -1,4 +1,4 @@
-package at.fhooe.mcm.cas;
+package at.fhooe.mcm.cas.contexttype;
 
 public class ContextTimeOfTheDay {
     private int hour = 0;
