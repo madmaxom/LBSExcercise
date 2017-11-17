@@ -4,6 +4,7 @@ import java.awt.Panel;
 import java.awt.Point;
 import java.util.Vector;
 
+import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gis.geomodel.Line;
 import at.fhooe.mcm.cas.gis.geomodel.ObjectPart;
@@ -55,12 +56,18 @@ public class POIComponent extends IComponent {
 	}
 
 	@Override
-	public void onContextElementUpdated(ContextElement contextElement) {
+	public void onGPSPositionUpdated(GPSPosition contextElement) {
 		
 	}
 
 	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
+		
+	}
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
 		
 	}
 

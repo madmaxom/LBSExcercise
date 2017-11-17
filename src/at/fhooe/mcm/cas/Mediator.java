@@ -6,6 +6,7 @@ import java.awt.event.WindowListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 
 public class Mediator implements IMediator, WindowListener, CommunicationObserver{
@@ -75,11 +76,6 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 		
 	}
 
-	@Override
-	public void onContextElementUpdated(ContextElement contextElement) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
@@ -97,10 +93,10 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 	}
 
 	@Override
-	public void notifyComponents(ContextElement contextElement, IComponent origin) {
+	public void notifyComponents(GPSPosition gpsPosition, IComponent origin) {
 		for(IComponent icomp: iset) {
 			if(!icomp.getName().equals(origin.getName())) {
-				icomp.onContextElementUpdated(contextElement);
+				icomp.onGPSPositionUpdated(gpsPosition);
 			}
 		}
 	}
@@ -112,6 +108,28 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 				icomp.onContextSituationUpdated(contextSituation);
 			}
 		}
+	}
+
+	@Override
+	public void notifyComponents(ContextElement contextElement, IComponent origin) {
+		for(IComponent icomp: iset) {
+			if(!icomp.getName().equals(origin.getName())) {
+				icomp.onContextElementUpdated(contextElement);
+			}
+		}
+		
+	}
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

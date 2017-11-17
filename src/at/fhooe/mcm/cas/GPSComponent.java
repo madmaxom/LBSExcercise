@@ -10,6 +10,7 @@ import org.postgis.PGgeometry;
 import org.postgresql.PGConnection;
 import org.postgresql.util.PGobject;
 
+import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gps.GPSReceiverController;
 import at.fhooe.mcm.cas.gps.GPSReceiverSim;
@@ -65,11 +66,6 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 	}
 
 
-	@Override
-	public void onContextElementUpdated(ContextElement contextElement) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	@Override
@@ -112,10 +108,24 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 			// close connections
 			s.close();
 			conn.close();
-			super.mMediator.notifyComponents(new ContextElement(_info.getLat(), _info.getLng()), this);
+			super.mMediator.notifyComponents(new GPSPosition(_info.getLat(), _info.getLng()), this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

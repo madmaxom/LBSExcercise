@@ -18,11 +18,13 @@ public class Main {
 		
 		// init components
 		IComponent gisComponent = new GISComponent(mediator, "Map");
+		IComponent aalComponent = new AALComponent(mediator, "AAL");
 		IComponent gpsComponent = new GPSComponent(mediator, "GPS");
 		IComponent poiComponent = new POIComponent(mediator, "POI");
 		
 		// register components to mediator
 		mediator.register(gisComponent);
+		//mediator.register(aalComponent); // no need to register, no view
 		mediator.register(gpsComponent);
 		mediator.register(poiComponent);
 	}

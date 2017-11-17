@@ -3,6 +3,7 @@ package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
 
+import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.GISController;
 import at.fhooe.mcm.cas.gis.GISModel;
 import at.fhooe.mcm.cas.gis.GISView;
@@ -34,7 +35,7 @@ public class GISComponent extends IComponent {
 		super.mMediator.notifyComponents(geoObject, this);
 	}
 	
-	public void updateComponents(ContextElement contextElement) {
+	public void updateComponents(GPSPosition contextElement) {
 		super.mMediator.notifyComponents(contextElement, this);
 	}
 	
@@ -49,12 +50,17 @@ public class GISComponent extends IComponent {
 	}
 
 	@Override
-	public void onContextElementUpdated(ContextElement contextElement) {
+	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
 		//location of gps component is received
 	}
 
 	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
+		
+	}
+
+	@Override
+	public void onContextElementUpdated(ContextElement contextElement) {
 		
 	}
 
