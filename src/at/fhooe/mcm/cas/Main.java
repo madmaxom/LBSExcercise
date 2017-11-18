@@ -24,7 +24,7 @@ public class Main {
 		
 		// register components to mediator
 		mediator.register(gisComponent);
-		//mediator.register(aalComponent); // no need to register, no view
+		mediator.register(aalComponent);
 		mediator.register(gpsComponent);
 		mediator.register(poiComponent);
 	}
