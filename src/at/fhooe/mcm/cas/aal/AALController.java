@@ -25,7 +25,13 @@ public class AALController extends WindowAdapter implements ActionListener {
 				mModel.getContextElementsFromFilesystem();
 				break;
 			}
-			}
+			case "btnLoadServer": {
+			System.out.println("Loading from Server");
+			mModel.getContextElementsFromServer();
+			break;
+		}
+		}
+			
 		}
 		
 	}
