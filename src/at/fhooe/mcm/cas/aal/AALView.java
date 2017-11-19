@@ -1,6 +1,5 @@
 package at.fhooe.mcm.cas.aal;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Panel;
@@ -14,14 +13,18 @@ public class AALView {
 		
 		mController = controller;
 		
-		Button btnStart = new Button("Load from FileSystem");
-		btnStart.setName("btnLoadFileSystem");
-		btnStart.addActionListener(controller);
+		Button btnLoadFileSystem = new Button("Load from FileSystem");
+		btnLoadFileSystem.setName("btnLoadFileSystem");
+		btnLoadFileSystem.addActionListener(controller);
+		
+		Button btnLoadServer = new Button("Load from Server");
+		btnLoadServer.setName("btnLoadServer");
+		btnLoadServer.addActionListener(controller);
        
 		
-		mPanel = new Panel(new BorderLayout());
-
-		mPanel.add(btnStart, BorderLayout.NORTH);
+		mPanel = new Panel(new FlowLayout());
+		mPanel.add(btnLoadServer, FlowLayout.LEFT);
+		mPanel.add(btnLoadFileSystem, FlowLayout.LEFT);
 	}
 	
 
