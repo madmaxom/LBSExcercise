@@ -24,11 +24,15 @@ import at.fhooe.mcm.cas.contexttype.ContextElement;
 public class AALModel {
 
 	private static final String SERVER_LIST_OF_FILES_FILE_NAME = "listOfFiles.html";
+	private static final String FILE_STRUCTURE_XML = "XML";
+	private static final String FILE_STRUCTURE_JSON = "JSON";
+	
 	private List<AALModelObserver> mObservers;
 	private IContextParser mParser;
 	private ParserMode mMode;
 	private String mFileSytemPath;
 	private String mServerPath;
+	private String mFileStructure;
 
 	public AALModel() {
 		mObservers = new ArrayList<>();
@@ -36,8 +40,9 @@ public class AALModel {
 		// default values
 		mMode = ParserMode.DOM;
 		createParser(mMode);
-		mFileSytemPath = "files/XML";
-		mServerPath = "http://localhost/files/XML/";
+		mFileStructure = FILE_STRUCTURE_XML;
+		mFileSytemPath = "files/";
+		mServerPath = "http://localhost/files/";
 
 	}
 
@@ -54,24 +59,11 @@ public class AALModel {
 	}
 
 	public void getContextElementsFromFilesystem() {
-
-		if (mParser == null || mFileSytemPath == null) {
-			System.out.println("No parser or path attached");
-			return;
-		}
-
 		readAllFiles(mParser, mFileSytemPath);
 	}
 
 	public void getContextElementsFromServer() {
-
-		if (mParser == null || mFileSytemPath == null) {
-			System.out.println("No parser or path attached");
-			return;
-		}
-
 		readAllFilesFromServer(mParser, mServerPath);
-
 	}
 
 	private void readAllFilesFromServer(IContextParser parser, String serverPath) {
@@ -80,7 +72,7 @@ public class AALModel {
 
 		// get list of files from server
 		try {
-			URL url = new URL(serverPath + SERVER_LIST_OF_FILES_FILE_NAME);
+			URL url = new URL(serverPath + mFileStructure + "/" + SERVER_LIST_OF_FILES_FILE_NAME);
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			List<String> listOfFiles = new ArrayList<String>();
 			String inputLine;
@@ -96,7 +88,7 @@ public class AALModel {
 				if (!fileName.isEmpty()) {
 
 					try {
-						String connectionStr = serverPath + fileName;
+						String connectionStr = serverPath + mFileStructure + "/" + fileName;
 						System.out.println("Connecting to: " + connectionStr);
 						URL fileUrl = new URL(connectionStr);
 						BufferedReader inFile = new BufferedReader(new InputStreamReader(fileUrl.openStream()));
@@ -156,7 +148,7 @@ public class AALModel {
 	private void readAllFiles(IContextParser parser, String path) {
 
 		List<ContextElement> elements = new ArrayList<>();
-		File folder = new File(path);
+		File folder = new File(path + mFileStructure);
 		File[] listOfFiles = folder.listFiles();
 
 		for (int i = 0; i < listOfFiles.length; i++) {
@@ -164,7 +156,7 @@ public class AALModel {
 			if (f.isFile()) {
 
 				try {
-					System.out.println("Parsing file " + f.getName());
+					System.out.println("Parsing file " + f.getAbsolutePath());
 					Path pathAbs = FileSystems.getDefault().getPath(f.getAbsolutePath());
 					String context = new String(Files.readAllBytes(pathAbs.toAbsolutePath()));
 					elements.addAll(parser.parse(context));
@@ -193,6 +185,18 @@ public class AALModel {
 	public void setParserMode(ParserMode mode) {
 		mMode = mode;
 		createParser(mode);
+	}
+
+	public void setStructureJSON() {
+		mFileStructure = FILE_STRUCTURE_JSON;
+		createParser(ParserMode.JSON);
+		
+		
+	}
+
+	public void setStructureXML() {
+		mFileStructure = FILE_STRUCTURE_XML;
+		createParser(ParserMode.DOM);
 	}
 
 }
