@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 
+import javax.swing.JRadioButton;
+
 public class AALController extends WindowAdapter implements ActionListener {
 
 	private AALModel mModel;
@@ -30,6 +32,22 @@ public class AALController extends WindowAdapter implements ActionListener {
 			mModel.getContextElementsFromServer();
 			break;
 		}
+			}
+		}
+			
+			if (src instanceof JRadioButton) {
+				JRadioButton b = (JRadioButton) _e.getSource();
+				switch (b.getName()) {
+				case "rbXml": {
+					System.out.println("XML");
+					mModel.setStructureXML();
+					break;
+				}
+				case "rbJson": {
+				System.out.println("JSON");
+				mModel.setStructureJSON();
+				break;
+			}
 		}
 			
 		}
