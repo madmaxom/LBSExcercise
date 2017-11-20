@@ -22,7 +22,7 @@ import at.fhooe.mcm.cas.gps.PositionUpdateListener;
 public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
 	private static final String FILENAME = "logs/GPS-Log-I.log";
-	private static final int SLEEP = 100; // half a second
+	private static final int SLEEP = 2000; // two seconds
 	private static final String FILTER = "GGA";
 	
 	private Panel mPanel;
@@ -35,7 +35,6 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 		
 		mPanel = v.getPanel();
 		
-		// TODO: uncomment
 		try {
 			// initialize receiver
 			GPSReceiverSim sim = new GPSReceiverSim(FILENAME, SLEEP, FILTER);
@@ -45,6 +44,7 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 			parser.addObserver((PositionUpdateListener) this);
 			
 			// start parsing
+			System.out.println("Parsing GPS logs: " + FILENAME + ", every " + SLEEP + " ms, Filter " + FILTER);
 			new Thread(parser).start();
 			
 		} catch (Exception _e) {
