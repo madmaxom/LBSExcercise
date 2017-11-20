@@ -92,7 +92,7 @@ public class DataView extends Panel {
 	 */
 	public void update(NMEAInfo _info) {
 		
-		System.out.println("DATA-VIEW");
+		// System.out.println("DATA-VIEW");
 		if (_info.getTime() != null) {
 			mLabelTimeV.setText(_info.getTime().toString());
 		}

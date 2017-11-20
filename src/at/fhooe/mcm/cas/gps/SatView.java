@@ -95,7 +95,7 @@ public class SatView extends Panel {
 	 * @param _info new NMEA-info
 	 */
 	public void update(NMEAInfo _info) {
-		System.out.println("SAT-VIEW");
+		// System.out.println("SAT-VIEW");
 		mNMEAInfo = _info;
 		mSatellitePoints.clear();
 		mSatelliteInfos.clear();

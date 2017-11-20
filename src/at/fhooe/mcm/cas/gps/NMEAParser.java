@@ -111,7 +111,7 @@ public class NMEAParser implements Runnable {
 		if (valid) {
 		
 			String[] data = toCheck.split(",", -1);
-			System.out.println("Parsing line " + mLineCounter + ", data fields " + data.length);
+			// System.out.println("Parsing line " + mLineCounter + ", data fields " + data.length);
 			
 
 			switch (data[0]) {
