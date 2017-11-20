@@ -24,7 +24,8 @@ public class DrawingContext {
 	/**
 	 * Absolute path to icon set for drawing POI-Objects.
 	 */
-	private static final String PATH_TO_ICONS = "D:\\FH\\4Sem\\OIS\\uebungen\\ue03\\OIS-UE03\\src\\at\\fhooe\\mc\\ois\\ue03\\icons\\";
+//	private static final String PATH_TO_ICONS = "D:\\FH\\4Sem\\OIS\\uebungen\\ue03\\OIS-UE03\\src\\at\\fhooe\\mc\\ois\\ue03\\icons\\";
+	private static final String PATH_TO_ICONS = "icons/";
 	
 	/**
 	 * Draws object on the graphics.
@@ -223,7 +224,8 @@ public class DrawingContext {
 
 				// draw icon
 				Rectangle bounds = _obj.getBounds();
-				_g.drawImage(image, bounds.x, bounds.y, null);
+				Point p = _matrix.multiply(new Point(bounds.x, bounds.y));
+				_g.drawImage(image, p.x, p.y, null);
 			}
 		}
 	}

@@ -1,5 +1,8 @@
 package at.fhooe.mcm.cas;
 
-public class ContextSituation {
+import java.util.List;
+import at.fhooe.mcm.cas.contexttype.*;
 
+public class ContextSituation {
+	public List<ContextElement> mContextElements;
 }

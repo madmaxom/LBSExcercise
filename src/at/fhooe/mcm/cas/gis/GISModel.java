@@ -71,6 +71,7 @@ public class GISModel {
 	 * Storage of all original GeoObjects.
 	 */
 	private Vector<GeoObject> mOrigGeoObjects;
+	private Vector<GeoObject> mPOIObjects = new Vector<GeoObject>();
 	
 	/**
 	 * Stores map scale.
@@ -157,7 +158,13 @@ public class GISModel {
 		createBufferedImage();
 		
 		// draw all geo objects
-		for (GeoObject obj : mOrigGeoObjects) {
+		Vector<GeoObject> gos = (Vector<GeoObject>) mOrigGeoObjects.clone();
+		for (GeoObject obj : gos) {
+			DrawingContext.drawObject(obj, mBufImg.getGraphics(), mMatrix, mPOIEnabled);
+		}
+		// draw all poi objects
+		Vector<GeoObject> pos = (Vector<GeoObject>) mPOIObjects.clone();
+		for (GeoObject obj : pos) {
 			DrawingContext.drawObject(obj, mBufImg.getGraphics(), mMatrix, mPOIEnabled);
 		}
 		calculateScale();
@@ -269,6 +276,7 @@ public class GISModel {
 	 * Loads data from Dummy-Server and saved it in vector.
 	 */
 	public void loadData() {
+		System.out.println("Loading data ...");
 		switch (mServerNr) {
 		case 0: {
 			loadFromDummyServer();
@@ -293,70 +301,78 @@ public class GISModel {
 	 * Loads data from a PostGre-Server.
 	 */
 	private void loadFromPostGre() {
-		Connection conn;
-		
-		try {
-			// Load the JDBC driver and establish connection
-			Class.forName("org.postgresql.Driver");
-			String url = "jdbc:postgresql://localhost:5432/osm_austria"; // osm_hawai, osm_faroe_island, osm_austria
-			conn = DriverManager.getConnection(url, "geo", "geo");
-			
-			// Add the geometry types to the connection
-			PGConnection c = (PGConnection) conn;
-			c.addDataType("geometry", (Class<? extends PGobject>) Class.forName("org.postgis.PGgeometry"));
-			c.addDataType("box2d", (Class<? extends PGobject>) Class.forName("org.postgis.PGbox2d"));
-	
-			// create statement and execute a select query
-			Statement s = conn.createStatement();
-
-			String sqlEnvelope = "";
-			if (mSticky) {
-				// load only within bounds
-				sqlEnvelope = " AND a.geom && ST_MakeEnvelope(" 
-				+ mStickyBounds.getX()
-				+ ", " + mStickyBounds.getY()
-				+ ", " + (mStickyBounds.getX() + mStickyBounds.getWidth())
-				+ ", " + (mStickyBounds.getY() + mStickyBounds.getHeight()) 
-				+ ")";
-			}
-			ResultSet r;
-			r = s.executeQuery("SELECT * FROM boundary_area AS a WHERE a.type IN (8000, 8001, 8002)" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			r = s.executeQuery("SELECT * FROM boundary_multiarea AS a WHERE a.type IN (8000, 8001, 8002)" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			
-			// waterway lines (river)
-			r = s.executeQuery("SELECT * FROM waterway_line AS a WHERE a.type IN (2001)" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			// TODO: uncomment to get all data
-//			/*
-			// residential, industrial, commercial, forest, meadow
-			r = s.executeQuery("SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002, 5003, 5004, 5006)" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			// grassland, wood, water
-			r = s.executeQuery("SELECT * FROM natural_area AS a WHERE a.type IN (6001, 6002, 6005);" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			// highway
-			r = s.executeQuery("SELECT * FROM highway_line AS a WHERE a.type IN (1010)" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-			// natural lines
-			r = s.executeQuery("SELECT * FROM natural_line AS a WHERE a.type IN (6001, 6002, 6005);" + sqlEnvelope + ";");
-			createGeoObjects(r);
-			
-//			*/
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Connection conn;
 				
-			// close connections
-			s.close();
-			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				try {
+					// Load the JDBC driver and establish connection
+					Class.forName("org.postgresql.Driver");
+					String url = "jdbc:postgresql://localhost:5432/osm_austria"; // osm_hawai, osm_faroe_island, osm_austria
+					conn = DriverManager.getConnection(url, "geo", "geo");
+					
+					// Add the geometry types to the connection
+					PGConnection c = (PGConnection) conn;
+					c.addDataType("geometry", (Class<? extends PGobject>) Class.forName("org.postgis.PGgeometry"));
+					c.addDataType("box2d", (Class<? extends PGobject>) Class.forName("org.postgis.PGbox2d"));
+			
+					// create statement and execute a select query
+					Statement s = conn.createStatement();
+
+					String sqlEnvelope = "";
+					if (mSticky) {
+						// load only within bounds
+						sqlEnvelope = " AND a.geom && ST_MakeEnvelope(" 
+						+ mStickyBounds.getX()
+						+ ", " + mStickyBounds.getY()
+						+ ", " + (mStickyBounds.getX() + mStickyBounds.getWidth())
+						+ ", " + (mStickyBounds.getY() + mStickyBounds.getHeight()) 
+						+ ")";
+					}
+					ResultSet r;
+					r = s.executeQuery("SELECT * FROM boundary_area AS a WHERE a.type IN (8000, 8001, 8002)" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					r = s.executeQuery("SELECT * FROM boundary_multiarea AS a WHERE a.type IN (8000, 8001, 8002)" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					
+					// waterway lines (river)
+					r = s.executeQuery("SELECT * FROM waterway_line AS a WHERE a.type IN (2001)" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					// TODO: uncomment to get all data
+//					/*
+					// residential, industrial, commercial, forest, meadow
+					r = s.executeQuery("SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002, 5003, 5004, 5006)" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					// grassland, wood, water
+					r = s.executeQuery("SELECT * FROM natural_area AS a WHERE a.type IN (6001, 6002, 6005);" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					// highway
+					r = s.executeQuery("SELECT * FROM highway_line AS a WHERE a.type IN (1010)" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+					// natural lines
+					r = s.executeQuery("SELECT * FROM natural_line AS a WHERE a.type IN (6001, 6002, 6005);" + sqlEnvelope + ";");
+					createGeoObjects(r);
+					
+//					*/
+						
+					// close connections
+					s.close();
+					conn.close();
+					zoomToFit();
+					System.out.println("Loading data done!");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		
 	}
 
 	private void createGeoObjects(ResultSet _r) {
@@ -454,7 +470,6 @@ public class GISModel {
 				
 				GeoObject geoObj = new GeoObject(id, type, objParts);
 				mOrigGeoObjects.addElement(geoObj);
-				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -569,7 +584,10 @@ public class GISModel {
 	}
 	
 	public void addGeoObject(GeoObject geoObject) {
-		mOrigGeoObjects.add(geoObject);
+		if(geoObject instanceof POIObject)
+			mPOIObjects.add(geoObject);
+		else
+			mOrigGeoObjects.addElement(geoObject);
 		drawAllGeoObjects();
 		notifyObservers();
 	}
