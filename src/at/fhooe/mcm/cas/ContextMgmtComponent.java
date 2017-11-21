@@ -1,17 +1,50 @@
 package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
+import java.util.ArrayList;
+import java.util.List;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.ctx.CtxController;
+import at.fhooe.mcm.cas.ctx.CtxModel;
+import at.fhooe.mcm.cas.ctx.CtxView;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 
 public class ContextMgmtComponent extends IComponent {
 	
+	public Panel mPanel;
 	public ContextSituation mSituation;
+	private CtxModel mCtxModel;
+	private ContextMgmtComponent mSelf = this;
 
 	public ContextMgmtComponent(IMediator mediator, String name) {
 		super(mediator, name);
 		mSituation = new ContextSituation();
+		
+		mCtxModel = new CtxModel();
+		CtxController c = new CtxController(mCtxModel);
+		CtxView v = new CtxView(c);
+		mPanel = v.getPanel();
+		c.addView(v);
+		mCtxModel.addCtxObserver(v);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				List<ContextElement> ces = new ArrayList<>();
+				while(true) {
+					try {
+						Thread.sleep(mCtxModel.getUpdateFrequency() * 1000);
+						ces = mCtxModel.getContext();
+						for(ContextElement ce : ces) {
+							mSituation.add(ce);
+						}
+						mMediator.notifyComponents(mSituation, mSelf);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	@Override
@@ -21,19 +54,8 @@ public class ContextMgmtComponent extends IComponent {
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
-		boolean found = false;
-		for (ContextElement ce : mSituation.mContextElements) {
-			if(ce.getType().equals(contextElement.getType())) {
-				ce.setContextMetaData(contextElement.getContextMetaData());
-				ce.setId(contextElement.getId());
-				ce.setKey(contextElement.getKey());
-				found = true;
-				break;
-			}
-		}
-		if(!found)
-			mSituation.mContextElements.add(contextElement);
-		mMediator.notifyComponents(mSituation, this);
+		mSituation.add(contextElement);
+		mCtxModel.updateContext(contextElement);
 	}
 
 	@Override
@@ -43,7 +65,7 @@ public class ContextMgmtComponent extends IComponent {
 
 	@Override
 	public Panel getView() {
-		return null;
+		return mPanel;
 	}
 
 	@Override

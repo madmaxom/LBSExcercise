@@ -10,6 +10,8 @@ public class ContextElementType {
 	public static final String CONTEXT_ELEMENT_POSITION = "position";
 	public static final String CONTEXT_ELEMENT_TEMPERATURE = "temperature";
 	public static final String CONTEXT_ELEMENT_TIME_OF_THE_DAY = "timeOfTheDay";
+	public static final String CONTEXT_ELEMENT_HUMIDITY = "humidity";
+	public static final String CONTEXT_ELEMENT_PRESSURE = "pressure";
 	
 	
 	public class ContextElementFuel {

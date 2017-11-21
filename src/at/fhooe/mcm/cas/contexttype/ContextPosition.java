@@ -30,14 +30,14 @@ public class ContextPosition extends ContextElement {
     }
 
     public ContextPosition() {
-    	
+    	setType(ContextElementType.CONTEXT_ELEMENT_POSITION);
     }
     
     public ContextPosition(String coordinateType, int xValue, int yValue) {
-
         this.coordinateType = coordinateType;
         this.xValue = xValue;
         this.yValue = yValue;
+        setType(ContextElementType.CONTEXT_ELEMENT_POSITION);
     }
 
     @Override

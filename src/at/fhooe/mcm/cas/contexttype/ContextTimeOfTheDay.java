@@ -17,6 +17,7 @@ public class ContextTimeOfTheDay extends ContextElement {
         this.year = year;
         this.month = month;
         this.day = day;
+        setType(ContextElementType.CONTEXT_ELEMENT_TIME_OF_THE_DAY);
     }
 
     public int getHour() {

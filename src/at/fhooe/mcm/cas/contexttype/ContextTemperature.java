@@ -12,12 +12,12 @@ public class ContextTemperature extends ContextElement {
     }
 
     public ContextTemperature() {
-    	
+    	setType(ContextElementType.CONTEXT_ELEMENT_TEMPERATURE);
     }
     
     public ContextTemperature(int temperature) {
-
         this.temperature = temperature;
+        setType(ContextElementType.CONTEXT_ELEMENT_TEMPERATURE);
     }
 
     @Override
