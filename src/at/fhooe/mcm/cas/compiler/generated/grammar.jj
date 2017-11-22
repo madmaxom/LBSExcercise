@@ -1,21 +1,23 @@
 options { STATIC = false; }
 PARSER_BEGIN(Compiler)
+package at.fhooe.mcm.cas.compiler.generated;
+
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 public class Compiler {
 public Compiler() {}
-public static void evaluate(String _expr) throws ParseException {
-InputStream input = new ByteArrayInputStream(_expr.getBytes());
-Compiler compiler = new Compiler(input);
-compiler.stmt();
-}
-public static void main(String[] _argv) {
-try {
-Compiler.evaluate(_argv[0]);
-} catch (Exception _e) {
-_e.printStackTrace();
-}
-}
+	public static void evaluate(String _expr) throws ParseException {
+		InputStream input = new ByteArrayInputStream(_expr.getBytes());
+		Compiler compiler = new Compiler(input);
+		compiler.stmt();
+	}
+	public static void main(String[] _argv) {
+		try {
+			Compiler.evaluate(_argv[0]);
+		} catch (Exception _e) {
+			_e.printStackTrace();
+		}
+	}
 }
 PARSER_END(Compiler) 
 
