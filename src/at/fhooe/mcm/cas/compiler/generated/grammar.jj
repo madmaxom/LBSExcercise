@@ -1,0 +1,51 @@
+options { STATIC = false; }
+PARSER_BEGIN(Compiler)
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+public class Compiler {
+public Compiler() {}
+public static void evaluate(String _expr) throws ParseException {
+InputStream input = new ByteArrayInputStream(_expr.getBytes());
+Compiler compiler = new Compiler(input);
+compiler.stmt();
+}
+public static void main(String[] _argv) {
+try {
+Compiler.evaluate(_argv[0]);
+} catch (Exception _e) {
+_e.printStackTrace();
+}
+}
+}
+PARSER_END(Compiler) 
+
+SKIP : {" " | "\t" | "\n" | "\r" }
+TOKEN :
+{
+<INT: (["0"-"9"])+> { System.out.print("number "); }
+| <DT: ("Day"|
+"Night")> { System.out.print("daytime(const)"); }
+| <DISTANCE: ("DISTANCE")> { System.out.print("DISTANCE "); }
+| <POINT: ("POINT")> { System.out.print("POINT "); }
+| <EQUALS: ("EQUALS")> { System.out.print("EQUALS "); }
+| <LESS: ("LESS")> { System.out.print("LESS "); }
+| <GREATER: ("GREATER")> { System.out.print("GREATER "); }
+| <CONTEXT_IDENTIFIER_DT: ("dt_now")> { System.out.print("daytime (var) "); }
+| <CONTEXT_IDENTIFIER_POS: ("pos_now")> { System.out.print("position (var) "); }
+}
+
+
+void stmt() : {}
+{
+daytime_stmt() daytime_comparison()
+| <EOF>
+}
+void daytime_comparison() : { }
+{
+<EQUALS> daytime_stmt()
+}
+void daytime_stmt() : { }
+{
+<DT>
+| <CONTEXT_IDENTIFIER_DT>
+}
