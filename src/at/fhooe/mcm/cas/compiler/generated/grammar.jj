@@ -21,10 +21,25 @@ public Compiler() {}
 }
 PARSER_END(Compiler) 
 
-SKIP : {" " | "\t" | "\n" | "\r" }
+SKIP : {" " | "\t" | "\n" | "\r" | "," }
 TOKEN :
 {
-<INT: (["0"-"9"])+> { System.out.print("number "); }
+  <GGA: "$GPGGA" > { System.out.print("GPGGA "); }
+| <FLOAT: (["0"-"9"])+"."(["0"-"9"])+ > { System.out.print("FLOAT "); }
+| < INT: (["0"-"9"])+ > { System.out.print("INT "); }
+| < CHAR: (["A"-"Z","*"])+ > { System.out.print("CHAR "); }
+/*
+| <TIME: (["0"-"9"])+> { System.out.print("TIME "); }
+| <LAT: ((["0"-"9"])+"."(["0"-"9"])+",N")> { System.out.print("LATITUDE "); }
+| <LATDIR: ["N","S"]> { System.out.print("LAT-DIRECTION "); }
+| <LON: ((["0"-"9"])+"."(["0"-"9"])+)> { System.out.print("LONGITUDE "); }
+| <LONDIR: ["E","W"]> { System.out.print("LON-DIRECTION "); }
+| <QUAL: ["0"-"9"]> { System.out.print("QUALITY "); }
+| <SATNR: (["0"-"9"])+> { System.out.print("SATELLITE-NR "); }
+| <HDOP: ((["0"-"9"])+"."(["0"-"9"])+)> { System.out.print("HDOP "); }
+| <ALT: ((["0"-"9"])+"."(["0"-"9"])+["M"])> { System.out.print("ALTITUDE "); }
+| <GEOH: ((["0"-"9"])+"."(["0"-"9"])+["M"])> { System.out.print("GEOID-HEIGHT "); }
+| <CHECK: ("*"(["0"-"9"])+)> { System.out.print("CHECKSUM "); }
 | <DT: ("Day"|
 "Night")> { System.out.print("daytime(const)"); }
 | <DISTANCE: ("DISTANCE")> { System.out.print("DISTANCE "); }
@@ -34,20 +49,55 @@ TOKEN :
 | <GREATER: ("GREATER")> { System.out.print("GREATER "); }
 | <CONTEXT_IDENTIFIER_DT: ("dt_now")> { System.out.print("daytime (var) "); }
 | <CONTEXT_IDENTIFIER_POS: ("pos_now")> { System.out.print("position (var) "); }
+*/
 }
 
 
-void stmt() : {}
+void stmt() : {
+}
 {
-daytime_stmt() daytime_comparison()
+  GPGGA_stmt() (time_stmt())? (lat_stmt())? (lon_stmt())? (qual_stmt())? (satnr_stmt())? (hdop_stmt())? (alt_stmt())? (geoh_stmt())? check_stmt()
 | <EOF>
 }
-void daytime_comparison() : { }
+void time_stmt() : { }
 {
-<EQUALS> daytime_stmt()
+  < INT >
 }
-void daytime_stmt() : { }
+void GPGGA_stmt() : { }
 {
-<DT>
-| <CONTEXT_IDENTIFIER_DT>
+<GGA >
+}
+void lat_stmt() : { Token t;}
+{
+  t = <FLOAT> { System.out.print(t.image); }
+  t = <CHAR> { System.out.println(t.image); }
+}
+void lon_stmt() : { Token t; }
+{
+  t = <FLOAT> { System.out.print(t.image); }
+  t = <CHAR> { System.out.println(t.image); }
+}
+void qual_stmt() : { }
+{
+	<INT>
+}
+void satnr_stmt() : {}
+{
+  < INT >
+}
+void hdop_stmt() : {}
+{
+  <FLOAT >
+}
+void alt_stmt() : {}
+{
+  < FLOAT><CHAR >
+}
+void geoh_stmt() : {}
+{
+  < FLOAT ><CHAR >
+}
+void check_stmt() : {}
+{
+  <CHAR ><INT >
 }
