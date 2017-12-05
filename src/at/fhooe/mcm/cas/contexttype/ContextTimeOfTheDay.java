@@ -70,4 +70,17 @@ public class ContextTimeOfTheDay extends ContextElement {
                 ", day=" + day +
                 '}';
     }
+    
+    @Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		ContextTimeOfTheDay cp = (ContextTimeOfTheDay)ce;
+		this.hour = cp.hour;
+        this.minuts = cp.minuts;
+        this.year = cp.year;
+        this.month = cp.month;
+        this.day = cp.day;
+	}
 }

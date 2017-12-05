@@ -26,4 +26,12 @@ public class ContextTemperature extends ContextElement {
                 "temperature=" + temperature +
                 '}';
     }
+    
+    @Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		this.temperature = ((ContextTemperature)ce).temperature;
+	}
 }

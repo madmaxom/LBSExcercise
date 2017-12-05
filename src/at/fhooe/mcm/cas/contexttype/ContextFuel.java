@@ -26,4 +26,12 @@ public class ContextFuel extends ContextElement {
                 "fuelStatus=" + fuelStatus +
                 '}';
     }
+
+	@Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		this.fuelStatus = ((ContextFuel)ce).fuelStatus;
+	}
 }

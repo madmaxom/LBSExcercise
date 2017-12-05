@@ -15,9 +15,7 @@ public class ContextSituation {
 		boolean found = false;
 		for (ContextElement temp : mContextElements) {
 			if(temp.getType().equals(ce.getType())) {
-				temp.setContextMetaData(ce.getContextMetaData());
-				temp.setId(ce.getId());
-				temp.setKey(ce.getKey());
+				temp.setData(ce);
 				found = true;
 				break;
 			}

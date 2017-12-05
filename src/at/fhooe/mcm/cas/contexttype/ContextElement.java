@@ -60,4 +60,6 @@ public abstract class ContextElement {
                 ", contextMetaData=" + contextMetaData +
                 '}';
     }
+    
+    public abstract void setData(ContextElement ce);
 }

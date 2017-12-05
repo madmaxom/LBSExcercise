@@ -48,4 +48,15 @@ public class ContextPosition extends ContextElement {
                 ", yValue=" + yValue +
                 '}';
     }
+    
+    @Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		ContextPosition cp = (ContextPosition)ce;
+		this.xValue = cp.xValue;
+		this.yValue = cp.yValue;
+		this.coordinateType = cp.coordinateType;
+	}
 }

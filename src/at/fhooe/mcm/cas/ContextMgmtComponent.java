@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextTemperature;
 import at.fhooe.mcm.cas.ctx.CtxController;
 import at.fhooe.mcm.cas.ctx.CtxModel;
 import at.fhooe.mcm.cas.ctx.CtxView;
@@ -37,6 +38,8 @@ public class ContextMgmtComponent extends IComponent {
 						ces = mCtxModel.getContext();
 						for(ContextElement ce : ces) {
 							mSituation.add(ce);
+							if(ce instanceof ContextTemperature)
+								mSituation.add(ce);
 						}
 						mMediator.notifyComponents(mSituation, mSelf);
 					} catch (InterruptedException e) {

@@ -26,4 +26,12 @@ public class ContextHumidity extends ContextElement {
                 "humidity=" + humidity +
                 '}';
     }
+    
+    @Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		this.humidity = ((ContextHumidity)ce).humidity;
+	}
 }

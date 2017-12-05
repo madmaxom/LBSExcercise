@@ -26,4 +26,12 @@ public class ContextPressure extends ContextElement {
                 "pressure=" + pressure +
                 '}';
     }
+    
+    @Override
+	public void setData(ContextElement ce) {
+		this.setContextMetaData(ce.getContextMetaData());
+		this.setId(ce.getId());
+		this.setKey(ce.getKey());
+		this.pressure = ((ContextPressure)ce).pressure;
+	}
 }
