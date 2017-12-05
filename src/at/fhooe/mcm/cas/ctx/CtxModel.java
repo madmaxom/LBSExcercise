@@ -11,6 +11,7 @@ import at.fhooe.mcm.cas.contexttype.ContextHumidity;
 import at.fhooe.mcm.cas.contexttype.ContextPressure;
 import at.fhooe.mcm.cas.contexttype.ContextTemperature;
 import at.fhooe.mcm.cas.contexttype.ContextTimeOfTheDay;
+import at.fhooe.mcm.cas.gis.DataObserver;
 
 public class CtxModel {
 	
@@ -25,6 +26,13 @@ public class CtxModel {
 
 	public void addCtxObserver(CtxView v) {
 		mObservers.add(v);
+	}
+	
+	private void notifyObservers(ContextElement ce) {
+		// notify
+		for (CtxObserver o : mObservers) {
+			o.updateCtx(ce);
+		}
 	}
 	
 	public Date getDate() {
@@ -83,6 +91,7 @@ public class CtxModel {
 			setHumidity(((ContextPressure)ce).getPressure());
 			break;
 		}
+		notifyObservers(ce);
 	}
 	
 	public List getContext() {

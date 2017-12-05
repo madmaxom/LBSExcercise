@@ -16,7 +16,8 @@ public class TabbedPanel extends JFrame{
     }
 	
 	public void insertPanel(IComponent c) {
-		jtp.insertTab(c.getName(), null, c.getView(), null, jtp.getTabCount());
+		if(c.getView() != null)
+			jtp.insertTab(c.getName(), null, c.getView(), null, jtp.getTabCount());
 	}
 
 	public void removePanel(IComponent icomp) {

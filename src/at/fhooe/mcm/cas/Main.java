@@ -22,6 +22,7 @@ public class Main {
 		IComponent gpsComponent = new GPSComponent(mediator, "GPS");
 		IComponent poiComponent = new POIComponent(mediator, "POI");
 		IComponent conComponent = new ContextMgmtComponent(mediator, "Context");
+		IComponent ruleComponent = new RuleContainerComponent(mediator, "RuleContainer");
 		
 		// register components to mediator
 		mediator.register(gisComponent);
@@ -29,5 +30,6 @@ public class Main {
 		mediator.register(gpsComponent);
 		mediator.register(poiComponent);
 		mediator.register(conComponent);
+		mediator.register(ruleComponent);
 	}
 }

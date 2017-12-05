@@ -131,24 +131,24 @@ public class CtxView implements CtxObserver {
 	@Override
 	public void updateCtx(ContextElement ce) {
 		switch(ce.getType()) {
-		case "TimeOfTheDay":
+		case "timeOfTheDay":
 			SpinnerDateModel sdm = new SpinnerDateModel();
 			ContextTimeOfTheDay temp = (ContextTimeOfTheDay)ce;
 			sdm.setValue(new Date(temp.getYear(), temp.getMonth(), temp.getDay(), temp.getHour(), temp.getMinuts()));
 			mSpinners[1].setModel(sdm);
 			((JSpinner.DefaultEditor) mSpinners[1].getEditor()).getTextField().setEditable(false);
 			break;
-		case "Temperature":
+		case "temperature":
 			((JSpinner.NumberEditor)mSpinners[2].getEditor()).getTextField().setText("" + ((ContextTemperature)ce).getTemperature());
 			break;
-		case "Fuel":
-			((JSpinner.NumberEditor)mSpinners[1].getEditor()).getTextField().setText("" + ((ContextFuel)ce).getFuelStatus());
+		case "fuel":
+			((JSpinner.NumberEditor)mSpinners[3].getEditor()).getTextField().setText("" + ((ContextFuel)ce).getFuelStatus());
 			break;
-		case "Humidity":
-			((JSpinner.NumberEditor)mSpinners[1].getEditor()).getTextField().setText("" + ((ContextHumidity)ce).getHumidity());
+		case "humidity":
+			((JSpinner.NumberEditor)mSpinners[4].getEditor()).getTextField().setText("" + ((ContextHumidity)ce).getHumidity());
 			break;
-		case "Pressure":
-			((JSpinner.NumberEditor)mSpinners[1].getEditor()).getTextField().setText("" + ((ContextPressure)ce).getPressure());
+		case "pressure":
+			((JSpinner.NumberEditor)mSpinners[5].getEditor()).getTextField().setText("" + ((ContextPressure)ce).getPressure());
 			break;
 		default:
 			//do nothing

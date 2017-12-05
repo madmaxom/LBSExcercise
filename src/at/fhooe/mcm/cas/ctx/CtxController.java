@@ -425,10 +425,10 @@ public class CtxController extends WindowAdapter
 				mModel.setUpdateFrequency((int)js.getValue());
 				break; 
 			case "Temperature":
-				mModel.setFuel((int)js.getValue());
+				mModel.setTemperature((int)js.getValue());
 				break;
 			case "Fuel":
-				mModel.setTemperature((int)js.getValue());
+				mModel.setFuel((int)js.getValue());
 				break;
 			case "Humidity":
 				mModel.setHumidity((int)js.getValue());
