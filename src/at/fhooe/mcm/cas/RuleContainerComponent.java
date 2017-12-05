@@ -12,7 +12,7 @@ public class RuleContainerComponent extends IComponent {
 
 	public RuleContainerComponent(IMediator mediator, String name) {
 		super(mediator, name);
-		mContainer = new RuleContainer("TEMPERATURE < 4", null);
+		mContainer = new RuleContainer("TEMPERATURE < 4 & TEMPERATURE > 0", null);
 	}
 
 	@Override

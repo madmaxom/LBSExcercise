@@ -21,7 +21,7 @@ public Compiler() {}
 	}
 	public static void main(String[] _argv) {
 		try {
-			Compiler.evaluate("TEMPERATURE < 4");
+			Compiler.evaluate("TEMPERATURE < 4 & TEMPERATURE > 0");
 		} catch (Exception _e) {
 			_e.printStackTrace();
 		}
@@ -35,6 +35,7 @@ TOKEN :
   < CONELEM: (["A"-"Z"])+ > { System.out.print("CONTEXT-ELEMENT "); }
 | < COMP: ["<",">","="] > { System.out.print("COMPARATOR "); }
 | < NUM: (["0"-"9"])+ > { System.out.print("NUMBER "); }
+| < LOGIC: ["&","|"] > { System.out.print("AND/OR "); }
 }
 
 TreeNode stmt() : {
@@ -42,8 +43,31 @@ TreeNode nodeA = null;
 TreeNode root = null;
 } // stmt var
 {
-nodeA = daytime_stmt() root = daytime_comparison(nodeA) { return root; }
+nodeA = valueComparison() (root = logicalComparison(nodeA))? { if(root == null) return nodeA; else return root; }
 } // stmt nonterminal
+
+TreeNode valueComparison() : {
+TreeNode nodeA = null;
+TreeNode root = null;
+}
+{
+nodeA = daytime_stmt() root = daytime_comparison(nodeA) { return root; }
+}
+
+TreeNode logicalComparison(TreeNode _nodeA) : {
+TreeNode root = null;
+TreeNode nodeB = null;
+Token t;
+} // daytime_comparison var
+{
+t = <LOGIC>
+nodeB = valueComparison() {
+root = new TreeNodeLogical(t.image);
+root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+return root;
+}
+}
+
 TreeNode daytime_comparison(TreeNode _nodeA) : {
 TreeNode root = null;
 TreeNode nodeB = null;
