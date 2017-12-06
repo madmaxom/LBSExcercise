@@ -21,7 +21,7 @@ public abstract class TreeNode {
 	 *            the currently known and needed context element values
 	 * @see ContextObject
 	 */
-	// public abstract void setVariableParameters(ContextObject[] _contextElements);
+	public abstract void setVariableParameters(Object[] _contextElements);
 
 	/**
 	 * Clears all temporary data (context values inside variale tree nodes)
@@ -75,4 +75,6 @@ public abstract class TreeNode {
 	public TreeNode[] getChilds() {
 		return mChilds;
 	}
+	
+	public abstract String toString();
 } // class
