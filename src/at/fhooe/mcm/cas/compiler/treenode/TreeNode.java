@@ -35,9 +35,7 @@ public abstract class TreeNode {
 	 * @return an int[] with the context element types considered in this part of
 	 *         the tree.
 	 */
-	public int[] getContextElements() {
-		return new int[0];
-	}
+	public abstract Class getContextElements();
 
 	/**
 	 * Delivers the root of the processing tree

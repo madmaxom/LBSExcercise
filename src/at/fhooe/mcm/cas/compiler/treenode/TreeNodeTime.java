@@ -3,6 +3,8 @@ package at.fhooe.mcm.cas.compiler.treenode;
 import java.util.Date;
 
 public class TreeNodeTime extends TreeNode {
+
+	int mValue;
 	
 	public TreeNodeTime() {
 		
@@ -15,8 +17,7 @@ public class TreeNodeTime extends TreeNode {
 
 	@Override
 	public void setVariableParameters(Object[] _contextElements) {
-		
-
+		mValue = (int)_contextElements[0];
 	}
 
 	@Override
@@ -31,4 +32,8 @@ public class TreeNodeTime extends TreeNode {
 		return null;
 	}
 
+	@Override
+	public Class getContextElements() {
+		return TreeNodeTime.class;
+	}
 }

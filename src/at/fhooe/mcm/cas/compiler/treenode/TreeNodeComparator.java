@@ -64,4 +64,9 @@ public class TreeNodeComparator extends TreeNode {
 		return null;
 	}
 
+	@Override
+	public Class getContextElements() {
+		return TreeNodeComparator.class;
+	}
+
 }

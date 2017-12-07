@@ -10,9 +10,9 @@ public class TreeNodeLogical extends TreeNode {
 
 	@Override
 	public Object calculate() throws NodeError {
-		if(mLogicalOperator.equals("AND")) {
+		if(mLogicalOperator.equals("&")) {
 			return (boolean)mChilds[0].calculate() && (boolean)mChilds[1].calculate();
-		} else if(mLogicalOperator.equals("OR")) {
+		} else if(mLogicalOperator.equals("|")) {
 			return (boolean)mChilds[0].calculate() || (boolean)mChilds[1].calculate();
 		}
 		return false;
@@ -20,8 +20,10 @@ public class TreeNodeLogical extends TreeNode {
 
 	@Override
 	public void setVariableParameters(Object[] _contextElements) {
-		// TODO Auto-generated method stub
-
+		if(mChilds != null) {
+			mChilds[0].setVariableParameters(_contextElements);
+			mChilds[1].setVariableParameters(_contextElements);
+		}
 	}
 
 	@Override
@@ -35,5 +37,9 @@ public class TreeNodeLogical extends TreeNode {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public Class getContextElements() {
+		return TreeNodeLogical.class;
+	}
 }

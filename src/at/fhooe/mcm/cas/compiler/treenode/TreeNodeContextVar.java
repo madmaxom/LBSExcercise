@@ -30,5 +30,9 @@ public class TreeNodeContextVar extends TreeNode {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public Class getContextElements() {
+		return TreeNodeContextVar.class;
+	}
 }

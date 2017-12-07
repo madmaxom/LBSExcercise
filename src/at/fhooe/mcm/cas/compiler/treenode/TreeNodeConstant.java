@@ -31,4 +31,9 @@ public class TreeNodeConstant extends TreeNode {
 		return null;
 	}
 
+	@Override
+	public Class getContextElements() {
+		return TreeNodeConstant.class;
+	}
+
 }
