@@ -1,4 +1,4 @@
-package at.fhooe.mcm.cas.compiler.rules;
+package at.fhooe.mcm.cas.rule.container;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -13,8 +13,9 @@ import at.fhooe.mcm.cas.compiler.generated.Compiler;
 
 public class RuleContainer {
 	private TreeNode mConditionRoot = null;
-	private String mAction = null;
-	public RuleContainer(String _condition, String _action) {
+	private Action mAction = null;
+	
+	public RuleContainer(String _condition, Action _action) {
 		InputStream input = new ByteArrayInputStream(_condition.getBytes());
 		Compiler compiler = new Compiler(input);
 		try {
@@ -24,6 +25,7 @@ public class RuleContainer {
 		}
 		mAction = _action;
 	}
+	
 	public boolean valid(ContextSituation _sit) {
 		if(_sit == null) {
 			return false;
@@ -44,6 +46,7 @@ public class RuleContainer {
 		}
 		return true;
 	}
+	
 	public void execute() {
 		
 	}
