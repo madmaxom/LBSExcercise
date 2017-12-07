@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+<rule>
+<condition>TEMPERATURE > 4</condition>
+<action>
+<class>at.fhooe.mc.GISComponent</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mc.gis.IWarningType</type>
+<value>at.fhooe.mc.gis.BlackIceWarning</value>
+</parameter>
+<parameter>
+<type>at.fhooe.mc.gis.IWarningType2</type>
+<value>at.fhooe.mc.gis.BlackIceWarning2</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+<rule>
+<condition>TEMPERATURE > 5</condition>
+<action>
+<class>at.fhooe.mc.GISComponent3</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mc.gis.IWarningType3</type>
+<value>at.fhooe.mc.gis.BlackIceWarning3</value>
+</parameter>
+<parameter>
+<type>at.fhooe.mc.gis.IWarningType4</type>
+<value>at.fhooe.mc.gis.BlackIceWarning4</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+</rules>
