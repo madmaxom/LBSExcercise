@@ -9,15 +9,12 @@ import at.fhooe.mcm.cas.ContextSituation;
 import at.fhooe.mcm.cas.compiler.treenode.NodeError;
 import at.fhooe.mcm.cas.compiler.treenode.TreeNode;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
-import at.fhooe.mcm.cas.contexttype.ContextElementType;
-import at.fhooe.mcm.cas.contexttype.ContextFuel;
-import at.fhooe.mcm.cas.contexttype.ContextTemperature;
 import at.fhooe.mcm.cas.compiler.generated.*;
 import at.fhooe.mcm.cas.compiler.generated.Compiler;
 
 public class RuleContainer {
 	private TreeNode mConditionRoot = null;
-	private Action mAction = null;
+	private Action mAction;
 	private String mCondition;
 	
 	public RuleContainer(String _condition, Action _action) {
@@ -36,6 +33,7 @@ public class RuleContainer {
 	
 	public boolean valid(ContextSituation _sit) {
 		if(_sit == null) {
+			System.out.println(this.getClass().getSimpleName() + ": Rule not processable. No ContextSituation");
 			return false;
 		}
 		if(mConditionRoot != null) {
@@ -64,6 +62,7 @@ public class RuleContainer {
 			try {
 				boolean valid = (boolean) mConditionRoot.calculate();
 				System.out.print(" -> " + valid);
+				System.out.println();
 				return valid;
 			} catch (NodeError e) {
 				e.printStackTrace();
@@ -86,6 +85,6 @@ public class RuleContainer {
 	}
 
 	public void execute() {
-		
+		System.out.println(this.getClass().getSimpleName() + ": Execute action " + mAction.toString());
 	}
 }
