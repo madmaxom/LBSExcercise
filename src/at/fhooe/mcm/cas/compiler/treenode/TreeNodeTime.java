@@ -1,6 +1,11 @@
 package at.fhooe.mcm.cas.compiler.treenode;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextElementType;
 
 public class TreeNodeTime extends TreeNode {
 
@@ -16,8 +21,13 @@ public class TreeNodeTime extends TreeNode {
 	}
 
 	@Override
-	public void setVariableParameters(Object[] _contextElements) {
-		mValue = (int)_contextElements[0];
+	public void setVariableParameters(List<ContextElement> _contextElements) {
+		// leave node
+		if (_contextElements != null && _contextElements.size() == 1) {
+			mValue = new Date().getHours();
+		} else {
+			System.out.println(this.getClass().getSimpleName() + ": no or multiple contextElement received in leave node");
+		}
 	}
 
 	@Override
@@ -32,8 +42,9 @@ public class TreeNodeTime extends TreeNode {
 		return null;
 	}
 
-	@Override
-	public Class getContextElements() {
-		return TreeNodeTime.class;
+	public List<String> getContextElements() {
+		List<String> l = new ArrayList<String>();
+		l.add(ContextElementType.CONTEXT_ELEMENT_TIME_OF_THE_DAY);
+		return l;
 	}
 }

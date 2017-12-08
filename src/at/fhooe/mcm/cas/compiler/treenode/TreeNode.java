@@ -1,5 +1,10 @@
 package at.fhooe.mcm.cas.compiler.treenode;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import at.fhooe.mcm.cas.contexttype.ContextElement;
+
 public abstract class TreeNode {
 	protected TreeNode[] mChilds = null;
 	protected TreeNode mRoot = null;
@@ -21,7 +26,34 @@ public abstract class TreeNode {
 	 *            the currently known and needed context element values
 	 * @see ContextObject
 	 */
-	public abstract void setVariableParameters(Object[] _contextElements);
+	public void setVariableParameters(List<ContextElement> _contextElements) {
+		if(mChilds != null) {
+			int fromIndex = 0;
+			int leafIndex = 0;
+			for (TreeNode t : mChilds) {
+				TreeNode[] c = t.getChilds();
+				List<ContextElement> childParams = new ArrayList<>();
+				if (c != null) {
+					
+					int toIndex = fromIndex + c.length;
+					/*
+					for (int index = fromIndex; fromIndex < toIndex; index++) {
+						childParams.add(_contextElements.get(index));
+					}
+					*/
+					childParams.addAll(_contextElements.subList(fromIndex, toIndex));
+					
+					t.setVariableParameters(childParams);
+					fromIndex = toIndex;
+				} else {
+					// leave node
+					childParams.addAll(_contextElements.subList(leafIndex, leafIndex + 1));
+					t.setVariableParameters(childParams);
+					leafIndex++;
+				}
+			}
+		}
+	}
 
 	/**
 	 * Clears all temporary data (context values inside variale tree nodes)
@@ -35,7 +67,13 @@ public abstract class TreeNode {
 	 * @return an int[] with the context element types considered in this part of
 	 *         the tree.
 	 */
-	public abstract Class getContextElements();
+	public List<String> getContextElements() {
+		List<String> l = new ArrayList<String>();
+		for (TreeNode t : mChilds) {
+			l.addAll(t.getContextElements());
+		}
+		return l;
+	}
 
 	/**
 	 * Delivers the root of the processing tree

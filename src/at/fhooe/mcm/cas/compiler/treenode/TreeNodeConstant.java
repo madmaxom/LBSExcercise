@@ -1,6 +1,13 @@
 package at.fhooe.mcm.cas.compiler.treenode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextElementType;
+import at.fhooe.mcm.cas.contexttype.ContextFuel;
+import at.fhooe.mcm.cas.contexttype.ContextTemperature;
+
 
 public class TreeNodeConstant extends TreeNode {
 
@@ -17,8 +24,18 @@ public class TreeNodeConstant extends TreeNode {
 	}
 
 	@Override
-	public void setVariableParameters(Object[] _contextElements) {
-		mValue = (int)_contextElements[0];
+	public void setVariableParameters(List<ContextElement> _contextElements) {
+		// leave node
+		if (_contextElements != null && _contextElements.size() == 1) {
+			ContextElement c = _contextElements.get(0);
+			if (c instanceof ContextTemperature) {
+				mValue = ((ContextTemperature) c).getTemperature();
+			} else if (c instanceof ContextFuel) {
+				mValue = ((ContextFuel) c).getFuelStatus();
+			}
+		} else {
+			System.out.println(this.getClass().getSimpleName() + ": no or multiple contextElement received in leave node");
+		}
 	}
 
 	@Override
@@ -32,8 +49,10 @@ public class TreeNodeConstant extends TreeNode {
 	}
 
 	@Override
-	public Class getContextElements() {
-		return TreeNodeConstant.class;
+	public List<String> getContextElements() {
+		List<String> l = new ArrayList<String>();
+		l.add(ContextElementType.CONTEXT_ELEMENT_TEMPERATURE);
+		return l;
 	}
 
 }

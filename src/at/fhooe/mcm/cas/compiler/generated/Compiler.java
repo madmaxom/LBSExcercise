@@ -10,7 +10,7 @@ public Compiler() {}
                 InputStream input = new ByteArrayInputStream(_expr.getBytes());
                 Compiler compiler = new Compiler(input);
                 TreeNode root = compiler.stmt();
-                root.setVariableParameters( new Object[] {  3 });
+                // root.setVariableParameters( new Object[] {  3 });
                 try {
                         Object result = root.calculate();
                         System.out.println(result.toString());

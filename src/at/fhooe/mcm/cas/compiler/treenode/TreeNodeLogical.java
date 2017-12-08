@@ -18,13 +18,6 @@ public class TreeNodeLogical extends TreeNode {
 		return false;
 	}
 
-	@Override
-	public void setVariableParameters(Object[] _contextElements) {
-		if(mChilds != null) {
-			mChilds[0].setVariableParameters(_contextElements);
-			mChilds[1].setVariableParameters(_contextElements);
-		}
-	}
 
 	@Override
 	public void clear() {
@@ -37,9 +30,5 @@ public class TreeNodeLogical extends TreeNode {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@Override
-	public Class getContextElements() {
-		return TreeNodeLogical.class;
-	}
+
 }

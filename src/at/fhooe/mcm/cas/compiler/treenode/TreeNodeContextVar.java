@@ -1,6 +1,10 @@
 package at.fhooe.mcm.cas.compiler.treenode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextElementType;
 
 public class TreeNodeContextVar extends TreeNode {
 
@@ -15,10 +19,7 @@ public class TreeNodeContextVar extends TreeNode {
 		return mContextVar;
 	}
 
-	@Override
-	public void setVariableParameters(Object[] _contextElements) {
 
-	}
 
 	@Override
 	public void clear() {
@@ -32,7 +33,10 @@ public class TreeNodeContextVar extends TreeNode {
 	}
 	
 	@Override
-	public Class getContextElements() {
-		return TreeNodeContextVar.class;
+	public List<String> getContextElements() {
+		List<String> l = new ArrayList<String>();
+		// add placeholder
+		l.add(null);
+		return l;
 	}
 }
