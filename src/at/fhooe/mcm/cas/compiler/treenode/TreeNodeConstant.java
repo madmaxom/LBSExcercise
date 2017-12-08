@@ -51,7 +51,7 @@ public class TreeNodeConstant extends TreeNode {
 	@Override
 	public List<String> getContextElements() {
 		List<String> l = new ArrayList<String>();
-		l.add(ContextElementType.CONTEXT_ELEMENT_TEMPERATURE);
+		l.add(mType);
 		return l;
 	}
 
