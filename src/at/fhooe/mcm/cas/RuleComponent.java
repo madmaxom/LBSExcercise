@@ -20,7 +20,7 @@ public class RuleComponent extends IComponent implements RuleModelObserver {
 
 	public RuleComponent(IMediator mediator, String name) {
 		super(mediator, name);
-		mContainer = new RuleContainer("TEMPERATURE < 4 & TEMPERATURE > 0", null);
+		mContainer = new RuleContainer("temperature < 4 & fuel > 0", null); 
 		
 		RuleModel m = new RuleModel();
 		m.addObserver(this);
