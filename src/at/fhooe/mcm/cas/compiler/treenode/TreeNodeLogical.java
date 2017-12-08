@@ -10,12 +10,17 @@ public class TreeNodeLogical extends TreeNode {
 
 	@Override
 	public Object calculate() throws NodeError {
-		if(mLogicalOperator.equals("&")) {
-			return (boolean)mChilds[0].calculate() && (boolean)mChilds[1].calculate();
-		} else if(mLogicalOperator.equals("|")) {
-			return (boolean)mChilds[0].calculate() || (boolean)mChilds[1].calculate();
+		if (mLogicalOperator == null || mLogicalOperator.isEmpty()) {
+			throw new NodeError("No value for evaluation.");
+		} else {
+			if(mLogicalOperator.equals("&")) {
+				return (boolean)mChilds[0].calculate() && (boolean)mChilds[1].calculate();
+			} else if(mLogicalOperator.equals("|")) {
+				return (boolean)mChilds[0].calculate() || (boolean)mChilds[1].calculate();
+			} else {
+				throw new NodeError("Unknown logical operator.");
+			}
 		}
-		return false;
 	}
 
 

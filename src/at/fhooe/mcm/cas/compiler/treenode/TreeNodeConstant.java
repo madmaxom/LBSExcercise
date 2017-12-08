@@ -12,7 +12,7 @@ import at.fhooe.mcm.cas.contexttype.ContextTemperature;
 public class TreeNodeConstant extends TreeNode {
 
 	String mType;
-	int mValue;
+	int mValue = Integer.MAX_VALUE;
 	
 	public TreeNodeConstant(String text) {
 		mType = text;
@@ -20,7 +20,11 @@ public class TreeNodeConstant extends TreeNode {
 
 	@Override
 	public Object calculate() throws NodeError {
-		return mValue;
+		if (mValue == Integer.MAX_VALUE) {
+			throw new NodeError("No value for evaluation.");
+		} else {
+			return mValue;
+		}
 	}
 
 	@Override

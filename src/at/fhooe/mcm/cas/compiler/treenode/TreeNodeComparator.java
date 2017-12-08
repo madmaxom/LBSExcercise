@@ -11,32 +11,33 @@ public class TreeNodeComparator extends TreeNode {
 
 	@Override
 	public Object calculate() throws NodeError {
-		int value1 = 0;
-		int value2 = 0;
-		/*
-		if(mChilds[0].getContextElements().equals(TreeNodeTime.class)) {
-			value1 = new Date().getHours();
-			value2 = (int)mChilds[1].calculate();
-		} else if(mChilds[0].getContextElements().equals(TreeNodeConstant.class)) {
+		
+		if (mComparator == null || mComparator.isEmpty()) {
+			throw new NodeError("No value for evaluation.");
+		} else {
+			int value1 = Integer.MAX_VALUE;
+			int value2 = Integer.MAX_VALUE;
+			
+			
 			value1 = (int)mChilds[0].calculate();
 			value2 = (int)mChilds[1].calculate();
+			
+			if (value1 == Integer.MAX_VALUE || value2 == Integer.MAX_VALUE) {
+				// default values, error
+				throw new NodeError("Got no values for evaluation.");
+			}
+			
+			switch(mComparator) {
+			case "<":
+				return value1 < value2;
+			case ">":
+				return value1 > value2;
+			case "=":
+				return value1 == value2;
+			default:
+				throw new NodeError("Unknown comparator.");
+			}
 		}
-		*/
-		
-		value1 = (int)mChilds[0].calculate();
-		value2 = (int)mChilds[1].calculate();
-		
-		switch(mComparator) {
-		case "<":
-			return value1 < value2;
-		case ">":
-			return value1 > value2;
-		case "=":
-			return value1 == value2;
-		default:
-			return null;
-		}
-
 	}
 
 

@@ -8,7 +8,7 @@ import at.fhooe.mcm.cas.contexttype.ContextElementType;
 
 public class TreeNodeContextVar extends TreeNode {
 
-	int mContextVar;
+	int mContextVar = Integer.MAX_VALUE;
 	
 	public TreeNodeContextVar(String text) {
 		mContextVar = Integer.parseInt(text);
@@ -16,7 +16,11 @@ public class TreeNodeContextVar extends TreeNode {
 	
 	@Override
 	public Object calculate() throws NodeError {
-		return mContextVar;
+		if (mContextVar == Integer.MAX_VALUE) {
+			throw new NodeError("No value for evaluation.");
+		} else {
+			return mContextVar;
+		}
 	}
 
 
