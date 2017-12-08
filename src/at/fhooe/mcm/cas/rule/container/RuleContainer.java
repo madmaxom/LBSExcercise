@@ -81,6 +81,7 @@ public class RuleContainer {
 				return c;
 			}
 		}
+		System.out.println(this.getClass().getSimpleName() + ": no ContextElement found for " + neededElement);
 		return null;
 	}
 
