@@ -4,13 +4,25 @@ package at.fhooe.mcm.cas.compiler.generated;
 import at.fhooe.mcm.cas.compiler.treenode.*;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
+import java.util.List;
+
 public class Compiler implements CompilerConstants {
 public Compiler() {}
         public static void evaluate(String _expr) throws ParseException {
                 InputStream input = new ByteArrayInputStream(_expr.getBytes());
                 Compiler compiler = new Compiler(input);
                 TreeNode root = compiler.stmt();
-                // root.setVariableParameters( new Object[] {  3 });
+
+                // testing only
+                /*
+		List<String> params = new ArrayList<>();
+		params.add("temperature");
+		params.add(null);
+		params.add("temperature");
+		params.add(null);
+		root.setVariableParameters(params);
+		*/
+
                 try {
                         Object result = root.calculate();
                         System.out.println(result.toString());
@@ -20,7 +32,8 @@ public Compiler() {}
         }
         public static void main(String[] _argv) {
                 try {
-                        Compiler.evaluate("TEMPERATURE < 4 & TEMPERATURE > 0");
+                        // testing only
+                        // Compiler.evaluate("temperature < 4 & temperature > 0");
                 } catch (Exception _e) {
                         _e.printStackTrace();
                 }

@@ -3,6 +3,7 @@ package at.fhooe.mcm.cas.compiler.generated;
 import at.fhooe.mcm.cas.compiler.treenode.*;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
 /** Token Manager. */
 public class CompilerTokenManager implements CompilerConstants
@@ -96,7 +97,7 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 1:
-                  if ((0x7fffffeL & l) != 0L)
+                  if ((0x7fffffe07fffffeL & l) != 0L)
                   {
                      if (kind > 6)
                         kind = 6;
@@ -109,7 +110,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                   }
                   break;
                case 0:
-                  if ((0x7fffffeL & l) == 0L)
+                  if ((0x7fffffe07fffffeL & l) == 0L)
                      break;
                   kind = 6;
                   jjCheckNAdd(0);
@@ -323,7 +324,7 @@ void TokenLexicalActions(Token matchedToken)
    {
       case 6 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                              System.out.print("CONTEXT-ELEMENT ");
+                                       System.out.print("CONTEXT-ELEMENT ");
          break;
       case 7 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
