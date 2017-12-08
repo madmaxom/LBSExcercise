@@ -10,6 +10,7 @@ import at.fhooe.mcm.cas.ctx.CtxController;
 import at.fhooe.mcm.cas.ctx.CtxModel;
 import at.fhooe.mcm.cas.ctx.CtxView;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
+import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
 public class ContextMgmtComponent extends IComponent {
 	
@@ -73,6 +74,12 @@ public class ContextMgmtComponent extends IComponent {
 
 	@Override
 	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
 		// TODO Auto-generated method stub
 		
 	}

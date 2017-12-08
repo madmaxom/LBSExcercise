@@ -9,6 +9,7 @@ import at.fhooe.mcm.cas.aal.AALView;
 import at.fhooe.mcm.cas.aal.parser.ParserMode;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
+import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
 public class AALComponent extends IComponent implements AALModelObserver {
 
@@ -65,6 +66,12 @@ public class AALComponent extends IComponent implements AALModelObserver {
 	public void update(ContextElement contextElement) {
 		// notify mediator
 		mMediator.notifyComponents(contextElement, this);
+	}
+
+	@Override
+	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

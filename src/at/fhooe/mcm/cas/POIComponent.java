@@ -10,6 +10,7 @@ import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gis.geomodel.ObjectPart;
 import at.fhooe.mcm.cas.gis.geomodel.PointObject;
 import at.fhooe.mcm.cas.poi.POIView;
+import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
 public class POIComponent extends IComponent {
 
@@ -77,6 +78,12 @@ public class POIComponent extends IComponent {
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
 		// TODO Auto-generated method stub
 		
 	}

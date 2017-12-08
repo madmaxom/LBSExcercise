@@ -8,8 +8,9 @@ import java.util.Set;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
+import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
-public class Mediator implements IMediator, WindowListener, CommunicationObserver{
+public class Mediator implements IMediator, WindowListener{
 	private Set<IComponent> iset = new HashSet<>();
 	private TabbedPanel mTabbedPanel;
 	
@@ -70,18 +71,6 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 		
 	}
 
-	@Override
-	public void onGeoObjectUpdated(GeoObject geoObject) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onContextSituationUpdated(ContextSituation contextSituation) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void notifyComponents(GeoObject geoObject, IComponent origin) {
@@ -120,16 +109,14 @@ public class Mediator implements IMediator, WindowListener, CommunicationObserve
 		
 	}
 
-	@Override
-	public void onContextElementUpdated(ContextElement contextElement) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
-		// TODO Auto-generated method stub
-		
+	public void notifyComponents(RuleEvaluator ruleEvaluator, IComponent origin) {
+		for(IComponent icomp: iset) {
+			if(!icomp.getName().equals(origin.getName())) {
+				icomp.onRuleEvaluatorUpdated(ruleEvaluator);
+			}
+		}
 	}
 }
 

@@ -18,6 +18,7 @@ import at.fhooe.mcm.cas.gps.GPSReceiverView;
 import at.fhooe.mcm.cas.gps.NMEAInfo;
 import at.fhooe.mcm.cas.gps.NMEAParser;
 import at.fhooe.mcm.cas.gps.PositionUpdateListener;
+import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
 public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
@@ -124,6 +125,13 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 
 	@Override
 	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
 		// TODO Auto-generated method stub
 		
 	}
