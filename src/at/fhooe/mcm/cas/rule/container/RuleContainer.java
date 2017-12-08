@@ -2,11 +2,14 @@ package at.fhooe.mcm.cas.rule.container;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import at.fhooe.mcm.cas.ContextSituation;
 import at.fhooe.mcm.cas.compiler.treenode.NodeError;
 import at.fhooe.mcm.cas.compiler.treenode.TreeNode;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextElementType;
 import at.fhooe.mcm.cas.contexttype.ContextFuel;
 import at.fhooe.mcm.cas.contexttype.ContextTemperature;
 import at.fhooe.mcm.cas.compiler.generated.*;
@@ -36,46 +39,51 @@ public class RuleContainer {
 			return false;
 		}
 		if(mConditionRoot != null) {
-			for(ContextElement ce : _sit.mContextElements) {
-				try {
-					Object[] obj = null;
-					
-					String valueStr = "";
-					if(ce instanceof ContextTemperature) {
-						Object value = ((ContextTemperature)ce).getTemperature();
-						obj = new Object[] { value };	
-						valueStr = value.toString();
-					} else if (ce instanceof ContextFuel) {
-						
-					} else {
-						// System.out.print("unknown context type");
-						return false;
-					}
-					
-					
-					System.out.println();
-					System.out.print("Evaluating: Rule: ");
-					System.out.print(mCondition);
-					System.out.print(", Value: ");
-					System.out.print(valueStr);
-					
-					
-					mConditionRoot.setVariableParameters(obj);
-					boolean valid = (boolean) mConditionRoot.calculate();
-					System.out.print(" -> " + valid);
-					
-					
-				} catch (NodeError e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			
+			// needed elements with placeholder
+			List<String> neededElements = mConditionRoot.getContextElements();
+			List<ContextElement> variableParameters = new ArrayList<>();
+			
+			for (String neededElement : neededElements) {
 				
+				if (neededElement != null) {
+					ContextElement contextElement = getContextElement(_sit, neededElement);
+					variableParameters.add(contextElement);
+				} else {
+					// add placeholder
+					variableParameters.add(null);
+				}	
+			}
+			
+			System.out.println();
+			System.out.print("Evaluating: Rule: ");
+			System.out.print(mCondition);
+			System.out.print(", Current params: " + variableParameters.toString());
+						
+			mConditionRoot.setVariableParameters(variableParameters);
+			try {
+				boolean valid = (boolean) mConditionRoot.calculate();
+				System.out.print(" -> " + valid);
+				return valid;
+			} catch (NodeError e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		return true;
+		return false;
 	}
 	
+	private ContextElement getContextElement(ContextSituation sit, String neededElement) {
+		for (ContextElement c : sit.mContextElements) {
+			if (c.getType().equals(neededElement)) {
+				// found element of this type
+				return c;
+			}
+		}
+		return null;
+	}
+
 	public void execute() {
 		
 	}
