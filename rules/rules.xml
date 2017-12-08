@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
 <rule>
-<condition>TEMPERATURE > 4</condition>
+<condition>temperature &lt; 4</condition>
 <action>
 <class>at.fhooe.mc.GISComponent</class>
 <method>setWarning</method>
@@ -18,7 +18,7 @@
 </action>
 </rule>
 <rule>
-<condition>TEMPERATURE > 5</condition>
+<condition>fuel &lt; 5 &amp; temperature &lt; 3</condition>
 <action>
 <class>at.fhooe.mc.GISComponent3</class>
 <method>setWarning</method>
