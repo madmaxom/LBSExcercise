@@ -5,9 +5,7 @@ import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.Choice;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +15,9 @@ import java.awt.Panel;
 import java.awt.Rectangle;
 import java.awt.TextField;
 import java.awt.image.BufferedImage;
+import java.util.List;
+
+import at.fhooe.mcm.cas.warningtype.IWarningType;
 
 
 /**
@@ -44,6 +45,8 @@ public class GISView implements DataObserver {
 	DrawingPanel mDrawingPanel;
 	
 	Panel mOverallPanel;
+	
+	WarningPanel mPanelWarnings;
 	
 	/**
 	 * TextField which shows map scale value.
@@ -167,6 +170,10 @@ public class GISView implements DataObserver {
 		panelButtons.add(panelMapScale);
 		panelButtons.add(btnEnablePOI);
 		
+		mPanelWarnings = new WarningPanel(new FlowLayout());
+		mPanelWarnings.add(panelLoad);
+		
+		mOverallPanel.add(mPanelWarnings, BorderLayout.NORTH);
 		mOverallPanel.add(mDrawingPanel, BorderLayout.CENTER);
 		mOverallPanel.add(panelButtons, BorderLayout.SOUTH);
 		
@@ -242,5 +249,14 @@ public class GISView implements DataObserver {
 	@Override
 	public void update(int _mapScale) {
 		mTextFieldMapScale.setText(String.valueOf(_mapScale));
+	}
+
+	public void setWarning(List<IWarningType> warningTypes) {
+		mPanelWarnings.drawWarnings(warningTypes);
+	}
+	
+	public void removeWarnings() {
+		// clear list
+		mPanelWarnings.removeWarnings();
 	}
 }
