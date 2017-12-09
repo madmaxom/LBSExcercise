@@ -1,6 +1,7 @@
 package at.fhooe.mcm.cas.gis;
 
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -38,6 +39,7 @@ public class WarningPanel extends Panel {
 	public WarningPanel(LayoutManager lm) {
 		super(lm);
 		mWarningTypes = new ArrayList<IWarningType>();
+		setPreferredSize(new Dimension(-1, IMAGE_SIZE + 5));
 	}
 	
 
