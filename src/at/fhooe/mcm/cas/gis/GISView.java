@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -171,7 +172,6 @@ public class GISView implements DataObserver {
 		panelButtons.add(btnEnablePOI);
 		
 		mPanelWarnings = new WarningPanel(new FlowLayout());
-		mPanelWarnings.add(panelLoad);
 		
 		mOverallPanel.add(mPanelWarnings, BorderLayout.NORTH);
 		mOverallPanel.add(mDrawingPanel, BorderLayout.CENTER);
