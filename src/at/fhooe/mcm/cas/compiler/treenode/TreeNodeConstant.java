@@ -6,7 +6,10 @@ import java.util.List;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.contexttype.ContextElementType;
 import at.fhooe.mcm.cas.contexttype.ContextFuel;
+import at.fhooe.mcm.cas.contexttype.ContextHumidity;
+import at.fhooe.mcm.cas.contexttype.ContextPressure;
 import at.fhooe.mcm.cas.contexttype.ContextTemperature;
+import at.fhooe.mcm.cas.contexttype.ContextTimeOfTheDay;
 
 
 public class TreeNodeConstant extends TreeNode {
@@ -36,6 +39,14 @@ public class TreeNodeConstant extends TreeNode {
 				mValue = ((ContextTemperature) c).getTemperature();
 			} else if (c instanceof ContextFuel) {
 				mValue = ((ContextFuel) c).getFuelStatus();
+			} else if (c instanceof ContextHumidity) {
+				mValue = ((ContextHumidity) c).getHumidity();
+			} else if (c instanceof ContextPressure) {
+				mValue = ((ContextPressure) c).getPressure();
+			} else if (c instanceof ContextTimeOfTheDay) {
+				mValue = ((ContextTimeOfTheDay) c).getHour();
+			} else {
+				System.out.println(this.getClass().getSimpleName() + ": unknown contextElement type received");
 			}
 		} else {
 			System.out.println(this.getClass().getSimpleName() + ": no or multiple contextElement received in leave node");
