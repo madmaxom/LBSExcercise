@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
 <rule>
-<condition>temperature &lt; 4</condition>
+<condition>temperature &gt; 29</condition>
 <action>
 <class>at.fhooe.mcm.cas.GISComponent</class>
 <method>setWarning</method>
 <parameters>
 <parameter>
 <type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
-<value>at.fhooe.mcm.cas.warningtype.BlackIceWarning</value>
+<value>at.fhooe.mcm.cas.warningtype.HotWarning</value>
 </parameter>
 </parameters>
 </action>
@@ -26,6 +26,58 @@
 <parameter>
 <type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
 <value>at.fhooe.mcm.cas.warningtype.FuelWarning</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+<rule>
+<condition>humidity &gt; 89 &amp; temperature &gt; 29</condition>
+<action>
+<class>at.fhooe.mcm.cas.GISComponent</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.LifeThreateningWarning</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+<rule>
+<condition>pressure &gt; 89</condition>
+<action>
+<class>at.fhooe.mcm.cas.GISComponent</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.PressureWarning</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+<rule>
+<condition>humidity &gt; 59</condition>
+<action>
+<class>at.fhooe.mcm.cas.GISComponent</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.HumidityWarning</value>
+</parameter>
+</parameters>
+</action>
+</rule>
+<rule>
+<condition>timeOfTheDay &gt; 20 &amp; timeOfTheDay &lt; 25</condition>
+<action>
+<class>at.fhooe.mcm.cas.GISComponent</class>
+<method>setWarning</method>
+<parameters>
+<parameter>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.TimeWarning</value>
 </parameter>
 </parameters>
 </action>
