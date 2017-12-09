@@ -1,6 +1,7 @@
 package at.fhooe.mcm.cas;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.Panel;
 
@@ -20,16 +21,18 @@ public class GISComponent extends IComponent {
 	private GISModel mGISModel;
 	private ContextSituation mContextSituation;
 	private RuleEvaluator mRuleEvaluator;
+	
+	private GISView mView;
 
 	public GISComponent(IMediator mediator, String name) {
 		super(mediator, name);
 			
 		mGISModel = new GISModel();
 		GISController c = new GISController(mGISModel);
-		GISView v = new GISView(c);
-		mPanel = v.getPanel();
-		c.addView(v);
-		mGISModel.addObserver(v);
+		mView = new GISView(c);
+		mPanel = mView.getPanel();
+		c.addView(mView);
+		mGISModel.addObserver(mView);
 	}
 	
 	@Override
@@ -82,6 +85,10 @@ public class GISComponent extends IComponent {
 			System.out.println("Can not evaluate rules, RuleEvaluator or ContextSituation is missing.");
 			return;
 		}
+		
+		System.out.println("Remove warnings");
+		mView.removeWarnings();
+		
 		List<RuleContainer> rules = mRuleEvaluator.getRules();
 		for (RuleContainer r : rules) {
 			if (!r.getAction().getClazz().equals(this.getClass().getName())) {
@@ -98,10 +105,19 @@ public class GISComponent extends IComponent {
 	
 	public void setWarning(IWarningType warningType) {
 		System.out.println("Set warning with type: " + warningType.getClass().getSimpleName());
+		
+		List<IWarningType> warningTypes = new ArrayList<IWarningType>();
+		warningTypes.add(warningType);
+		mView.setWarning(warningTypes);
 	}
 	
 	public void setWarning(IWarningType warningType1, IWarningType warningType2) {
 		System.out.println("Set warning with type: " + warningType1.getClass().getSimpleName() + " and " + warningType2.getClass().getSimpleName());
+		
+		List<IWarningType> warningTypes = new ArrayList<IWarningType>();
+		warningTypes.add(warningType1);
+		warningTypes.add(warningType2);
+		mView.setWarning(warningTypes);
 	}
 	
 
