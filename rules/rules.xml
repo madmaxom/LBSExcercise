@@ -3,16 +3,12 @@
 <rule>
 <condition>temperature &lt; 4</condition>
 <action>
-<class>at.fhooe.mc.GISComponent</class>
+<class>at.fhooe.mcm.cas.GISComponent</class>
 <method>setWarning</method>
 <parameters>
 <parameter>
-<type>at.fhooe.mc.gis.IWarningType</type>
-<value>at.fhooe.mc.gis.BlackIceWarning</value>
-</parameter>
-<parameter>
-<type>at.fhooe.mc.gis.IWarningType2</type>
-<value>at.fhooe.mc.gis.BlackIceWarning2</value>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.BlackIceWarning</value>
 </parameter>
 </parameters>
 </action>
@@ -20,16 +16,16 @@
 <rule>
 <condition>fuel &lt; 5 &amp; temperature &lt; 3</condition>
 <action>
-<class>at.fhooe.mc.GISComponent3</class>
+<class>at.fhooe.mcm.cas.GISComponent</class>
 <method>setWarning</method>
 <parameters>
 <parameter>
-<type>at.fhooe.mc.gis.IWarningType3</type>
-<value>at.fhooe.mc.gis.BlackIceWarning3</value>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.BlackIceWarning</value>
 </parameter>
 <parameter>
-<type>at.fhooe.mc.gis.IWarningType4</type>
-<value>at.fhooe.mc.gis.BlackIceWarning4</value>
+<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
+<value>at.fhooe.mcm.cas.warningtype.FuelWarning</value>
 </parameter>
 </parameters>
 </action>
