@@ -13,11 +13,19 @@ public interface CompilerConstants {
   /** RegularExpression Id. */
   int CONELEM = 6;
   /** RegularExpression Id. */
-  int COMP = 7;
+  int DIST_BEGIN = 7;
   /** RegularExpression Id. */
-  int NUM = 8;
+  int DIST_END = 8;
   /** RegularExpression Id. */
-  int LOGIC = 9;
+  int COMP = 9;
+  /** RegularExpression Id. */
+  int NUM = 10;
+  /** RegularExpression Id. */
+  int DOUBLE = 11;
+  /** RegularExpression Id. */
+  int LOGIC = 12;
+  /** RegularExpression Id. */
+  int POINT_DIVIDER = 13;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -31,9 +39,13 @@ public interface CompilerConstants {
     "\"\\r\"",
     "\",\"",
     "<CONELEM>",
+    "\"distance (\"",
+    "\")\"",
     "<COMP>",
     "<NUM>",
+    "<DOUBLE>",
     "<LOGIC>",
+    "<POINT_DIVIDER>",
   };
 
 }

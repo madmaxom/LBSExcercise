@@ -34,7 +34,7 @@ public Compiler() {}
 	public static void main(String[] _argv) {
 		try {
 		  	// testing only
-			// Compiler.evaluate("temperature < 4 & temperature > 0");
+			// Compiler.evaluate("distance (position, 44.1:56.1) > 10");
 		} catch (Exception _e) {
 			_e.printStackTrace();
 		}
@@ -46,9 +46,13 @@ SKIP : {" " | "\t" | "\n" | "\r" | "," }
 TOKEN :
 {
   < CONELEM: (["A"-"Z", "a"-"z"])+ > { System.out.print("CONTEXT-ELEMENT "); }
+|  < DIST_BEGIN: ("distance (") > { System.out.print("DISTANCE-BEGIN "); }
+|  < DIST_END: (")") > { System.out.print("DISTANCE END "); }
 | < COMP: ["<",">","="] > { System.out.print("COMPARATOR "); }
 | < NUM: (["0"-"9"])+ > { System.out.print("NUMBER "); }
+| <DOUBLE: (["0"-"9"])+"."(["0"-"9"])+ > { System.out.print("DOUBLE "); }
 | < LOGIC: ["&","|"] > { System.out.print("AND/OR "); }
+| < POINT_DIVIDER: [":"] > { System.out.print("POINT-DIVIDER "); }
 }
 
 TreeNode stmt() : {
@@ -64,14 +68,14 @@ TreeNode nodeA = null;
 TreeNode root = null;
 }
 {
-nodeA = daytime_stmt() root = daytime_comparison(nodeA) { return root; }
+(nodeA = value_stmt() | nodeA = dist_stmt()) root = value_comparison(nodeA) { return root; }
 }
 
 TreeNode logicalComparison(TreeNode _nodeA) : {
 TreeNode root = null;
 TreeNode nodeB = null;
 Token t;
-} // daytime_comparison var
+} 
 {
 t = <LOGIC>
 nodeB = valueComparison() {
@@ -81,21 +85,45 @@ return root;
 }
 }
 
-TreeNode daytime_comparison(TreeNode _nodeA) : {
+TreeNode value_comparison(TreeNode _nodeA) : {
 TreeNode root = null;
 TreeNode nodeB = null;
 Token t;
-} // daytime_comparison var
+} 
 {
 t = <COMP>
-nodeB = daytime_stmt() {
+nodeB = value_stmt() {
 root = new TreeNodeComparator(t.image);
 root.setChilds(new TreeNode[]{ _nodeA, nodeB });
 return root;
-} // 1. path
-} // daytime_comparison nonterminal
-TreeNode daytime_stmt() : { Token t; }
+} 
+}
+
+TreeNode value_stmt() : { Token t; }
 {
 t = <CONELEM> { return new TreeNodeConstant(t.image); }
 | t = <NUM> { return new TreeNodeContextVar(t.image); }
+}
+
+TreeNode dist_stmt() : {
+  Token t;
+  TreeNode nodePoint1;
+  TreeNode nodePoint2;
+  TreeNode nodeDist;
+ }
+{
+<DIST_BEGIN>
+nodePoint1 = distval_stmt()
+nodePoint2 = distval_stmt()
+<DIST_END> {
+nodeDist = new TreeNodeDistance();
+nodeDist.setChilds(new TreeNode[]{ nodePoint1, nodePoint2 });
+return nodeDist;
+}
+}
+
+TreeNode distval_stmt() : { Token t; Token t2; }
+{
+t = <CONELEM> { return new TreeNodePosition(t.image); }
+| t = <DOUBLE> <POINT_DIVIDER> t2 = <DOUBLE> { return new TreeNodePoint(t.image, t2.image); }
 }

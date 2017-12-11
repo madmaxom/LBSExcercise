@@ -33,7 +33,7 @@ public Compiler() {}
         public static void main(String[] _argv) {
                 try {
                         // testing only
-                        // Compiler.evaluate("temperature < 4 & temperature > 0");
+                        // Compiler.evaluate("distance (position, 44.1:56.1) > 10");
                 } catch (Exception _e) {
                         _e.printStackTrace();
                 }
@@ -59,9 +59,21 @@ TreeNode root = null;
   final public TreeNode valueComparison() throws ParseException {
 TreeNode nodeA = null;
 TreeNode root = null;
-    nodeA = daytime_stmt();
-    root = daytime_comparison(nodeA);
-                                                          {if (true) return root;}
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case CONELEM:
+    case NUM:
+      nodeA = value_stmt();
+      break;
+    case DIST_BEGIN:
+      nodeA = dist_stmt();
+      break;
+    default:
+      jj_la1[1] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    root = value_comparison(nodeA);
+                                                                              {if (true) return root;}
     throw new Error("Missing return statement in function");
   }
 
@@ -77,21 +89,20 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     throw new Error("Missing return statement in function");
   }
 
-  final public TreeNode daytime_comparison(TreeNode _nodeA) throws ParseException {
+  final public TreeNode value_comparison(TreeNode _nodeA) throws ParseException {
 TreeNode root = null;
 TreeNode nodeB = null;
 Token t;
     t = jj_consume_token(COMP);
-    nodeB = daytime_stmt();
+    nodeB = value_stmt();
 root = new TreeNodeComparator(t.image);
 root.setChilds(new TreeNode[]{ _nodeA, nodeB });
 {if (true) return root;}
     throw new Error("Missing return statement in function");
   }
 
-  // daytime_comparison nonterminal
-  final public TreeNode daytime_stmt() throws ParseException {
-                            Token t;
+  final public TreeNode value_stmt() throws ParseException {
+                          Token t;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CONELEM:
       t = jj_consume_token(CONELEM);
@@ -102,7 +113,43 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
               {if (true) return new TreeNodeContextVar(t.image);}
       break;
     default:
-      jj_la1[1] = jj_gen;
+      jj_la1[2] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public TreeNode dist_stmt() throws ParseException {
+  Token t;
+  TreeNode nodePoint1;
+  TreeNode nodePoint2;
+  TreeNode nodeDist;
+    jj_consume_token(DIST_BEGIN);
+    nodePoint1 = distval_stmt();
+    nodePoint2 = distval_stmt();
+    jj_consume_token(DIST_END);
+nodeDist = new TreeNodeDistance();
+nodeDist.setChilds(new TreeNode[]{ nodePoint1, nodePoint2 });
+{if (true) return nodeDist;}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public TreeNode distval_stmt() throws ParseException {
+                            Token t; Token t2;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case CONELEM:
+      t = jj_consume_token(CONELEM);
+                {if (true) return new TreeNodePosition(t.image);}
+      break;
+    case DOUBLE:
+      t = jj_consume_token(DOUBLE);
+      jj_consume_token(POINT_DIVIDER);
+      t2 = jj_consume_token(DOUBLE);
+                                               {if (true) return new TreeNodePoint(t.image, t2.image);}
+      break;
+    default:
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -118,13 +165,13 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[2];
+  final private int[] jj_la1 = new int[4];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x200,0x140,};
+      jj_la1_0 = new int[] {0x1000,0x4c0,0x440,0x840,};
    }
 
   /** Constructor with InputStream. */
@@ -138,7 +185,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -152,7 +199,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -162,7 +209,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -172,7 +219,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -181,7 +228,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -190,7 +237,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -241,12 +288,12 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[10];
+    boolean[] la1tokens = new boolean[14];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 4; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -255,7 +302,7 @@ root.setChilds(new TreeNode[]{ _nodeA, nodeB });
         }
       }
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 14; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
