@@ -11,6 +11,7 @@ import org.postgresql.PGConnection;
 import org.postgresql.util.PGobject;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextPosition;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gps.GPSReceiverController;
 import at.fhooe.mcm.cas.gps.GPSReceiverSim;
@@ -23,7 +24,7 @@ import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
 	private static final String FILENAME = "files/gpslogs/GPS-Log-I.log";
-	private static final int SLEEP = 2000; // two seconds
+	private static final int SLEEP = 200; // ms
 	private static final String FILTER = "GGA";
 	
 	private Panel mPanel;
@@ -109,8 +110,11 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 			// close connections
 			s.close();
 			conn.close();
-			if (super.mMediator != null)
+			if (super.mMediator != null) {
 				super.mMediator.notifyComponents(new GPSPosition(_info.getLat(), _info.getLng()), this);
+				ContextPosition cp = new ContextPosition("", _info.getLat(), _info.getLng());
+				mMediator.notifyComponents(cp, this);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
