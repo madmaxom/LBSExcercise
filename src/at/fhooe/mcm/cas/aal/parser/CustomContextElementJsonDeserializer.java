@@ -42,8 +42,8 @@ public class CustomContextElementJsonDeserializer implements JsonDeserializer<Co
 	    	case ContextElementType.CONTEXT_ELEMENT_POSITION: {
 	    		ContextPosition contextPosition = new ContextPosition();
 	    		contextPosition.setCoordinateType(contextValueObj.get(ContextElementType.ContextElementPosition.COORDINATE_TYPE).getAsString());
-	    		contextPosition.setxValue(contextValueObj.get(ContextElementType.ContextElementPosition.X_VALUE).getAsInt());
-	    		contextPosition.setyValue(contextValueObj.get(ContextElementType.ContextElementPosition.Y_VALUE).getAsInt());
+	    		contextPosition.setxValue(contextValueObj.get(ContextElementType.ContextElementPosition.X_VALUE).getAsDouble());
+	    		contextPosition.setyValue(contextValueObj.get(ContextElementType.ContextElementPosition.Y_VALUE).getAsDouble());
 	    		
 	    		
 	    		contextElement = contextPosition;

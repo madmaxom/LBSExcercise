@@ -63,10 +63,10 @@ public class DOMContextParser implements IContextParser {
 						contextPosition.setCoordinateType(
 								eElement.getElementsByTagName(ContextElementType.ContextElementPosition.COORDINATE_TYPE)
 										.item(0).getTextContent());
-						contextPosition.setxValue(Integer.parseInt(
+						contextPosition.setxValue(Double.parseDouble(
 								eElement.getElementsByTagName(ContextElementType.ContextElementPosition.X_VALUE).item(0)
 										.getTextContent()));
-						contextPosition.setyValue(Integer.parseInt(
+						contextPosition.setyValue(Double.parseDouble(
 								eElement.getElementsByTagName(ContextElementType.ContextElementPosition.Y_VALUE).item(0)
 										.getTextContent()));
 

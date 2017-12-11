@@ -71,11 +71,11 @@ public class KXmlContextParser implements IContextParser {
      		    
      		   parser.nextTag();
      		   parser.require(XmlPullParser.START_TAG, null, ContextElementType.ContextElementPosition.X_VALUE);
-    		   contextPosition.setxValue(Integer.parseInt(parser.nextText()));
+    		   contextPosition.setxValue(Double.parseDouble(parser.nextText()));
         		
      		   parser.nextTag();
      		   parser.require(XmlPullParser.START_TAG, null, ContextElementType.ContextElementPosition.Y_VALUE);
-    		   contextPosition.setyValue(Integer.parseInt(parser.nextText()));
+    		   contextPosition.setyValue(Double.parseDouble(parser.nextText()));
 
     		   
     		   contextElement = contextPosition;

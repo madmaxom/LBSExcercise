@@ -2,8 +2,8 @@ package at.fhooe.mcm.cas.contexttype;
 
 public class ContextPosition extends ContextElement {
     private String coordinateType = "";
-    private int xValue = 0;
-    private int yValue = 0;
+    private double xValue = 0;
+    private double yValue = 0;
 
     public String getCoordinateType() {
         return coordinateType;
@@ -13,19 +13,19 @@ public class ContextPosition extends ContextElement {
         this.coordinateType = coordinateType;
     }
 
-    public int getxValue() {
+    public double getxValue() {
         return xValue;
     }
 
-    public void setxValue(int xValue) {
+    public void setxValue(double xValue) {
         this.xValue = xValue;
     }
 
-    public int getyValue() {
+    public double getyValue() {
         return yValue;
     }
 
-    public void setyValue(int yValue) {
+    public void setyValue(double yValue) {
         this.yValue = yValue;
     }
 
@@ -33,7 +33,7 @@ public class ContextPosition extends ContextElement {
     	setType(ContextElementType.CONTEXT_ELEMENT_POSITION);
     }
     
-    public ContextPosition(String coordinateType, int xValue, int yValue) {
+    public ContextPosition(String coordinateType, double xValue, double yValue) {
         this.coordinateType = coordinateType;
         this.xValue = xValue;
         this.yValue = yValue;
