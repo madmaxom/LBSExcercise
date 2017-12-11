@@ -29,8 +29,8 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 	private Panel mPanel;
 	
 	public GPSComponent(IMediator mediator, String name) {
-		super(mediator, name);
-		
+		super(mediator, name != null && "".equals(name) ? "GPS" : name);
+
 		GPSReceiverController c = new GPSReceiverController();
 		GPSReceiverView v = new GPSReceiverView(c);
 		
@@ -109,7 +109,8 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 			// close connections
 			s.close();
 			conn.close();
-			super.mMediator.notifyComponents(new GPSPosition(_info.getLat(), _info.getLng()), this);
+			if (super.mMediator != null)
+				super.mMediator.notifyComponents(new GPSPosition(_info.getLat(), _info.getLng()), this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

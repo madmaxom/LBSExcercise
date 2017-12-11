@@ -16,20 +16,22 @@ public class Main {
         // mediator, holding all components
 		IMediator mediator = new Mediator(tp);
 		
-		// init components
-		IComponent gisComponent = new GISComponent(mediator, "Map");
-		IComponent aalComponent = new AALComponent(mediator, "AAL");
-		IComponent gpsComponent = new GPSComponent(mediator, "GPS");
-		IComponent poiComponent = new POIComponent(mediator, "POI");
-		IComponent conComponent = new ContextMgmtComponent(mediator, "Context");
-		IComponent ruleComponent = new RuleComponent(mediator, "Rule");
+//		// init components
+//		IComponent gisComponent = new GISComponent(mediator, "Map");
+//		IComponent aalComponent = new AALComponent(mediator, "AAL");
+//		IComponent gpsComponent = new GPSComponent(mediator, "GPS");
+//		IComponent poiComponent = new POIComponent(mediator, "POI");
+//		IComponent conComponent = new ContextMgmtComponent(mediator, "Context");
+//		IComponent ruleComponent = new RuleComponent(mediator, "Rule");
+//		
+//		// register components to mediator
+//		mediator.register(gisComponent);
+//		mediator.register(aalComponent);
+//		mediator.register(gpsComponent);
+//		mediator.register(poiComponent);
+//		mediator.register(conComponent);
+//		mediator.register(ruleComponent);
 		
-		// register components to mediator
-		mediator.register(gisComponent);
-		mediator.register(aalComponent);
-		mediator.register(gpsComponent);
-		mediator.register(poiComponent);
-		mediator.register(conComponent);
-		mediator.register(ruleComponent);
+		mediator.initComponents("files/XML/ComponentComposition.xml"); //init components from file
 	}
 }

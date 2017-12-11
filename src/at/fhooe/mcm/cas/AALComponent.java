@@ -21,7 +21,7 @@ public class AALComponent extends IComponent implements AALModelObserver {
 	}
 	
 	public AALComponent(IMediator mediator, String name,  ParserMode mode) {
-		super(mediator, name);
+		super(mediator, name != null && "".equals(name) ? "AAL" : name);
 		
 		AALModel m = new AALModel();
 		m.addObserver(this);

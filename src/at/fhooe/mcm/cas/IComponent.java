@@ -12,6 +12,10 @@ public abstract class IComponent implements CommunicationObserver {
 		mName = name;
 	}
 	
+	public void setMediator(IMediator mediator) {
+		mMediator = mediator;
+	}
+	
 	public String getName() {
 		return mName;
 	}

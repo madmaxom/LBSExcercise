@@ -17,7 +17,7 @@ public class POIComponent extends IComponent {
 	private Panel mPanel;
 	
 	public POIComponent(IMediator mediator, String name) {
-		super(mediator, name);
+		super(mediator, name != null && "".equals(name) ? "POI" : name);
 		
 		POIView v = new POIView();
 		mPanel = v.getPanel();
@@ -45,10 +45,14 @@ public class POIComponent extends IComponent {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				IMediator temp;
 				try {
 					Thread.sleep(5000);
-					m.notifyComponents(POIs[0], icomp);
-					m.notifyComponents(POIs[1], icomp);
+					temp = getMediator();
+					if(temp != null) {
+						temp.notifyComponents(POIs[0], icomp);
+						temp.notifyComponents(POIs[1], icomp);
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -86,6 +90,10 @@ public class POIComponent extends IComponent {
 	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public IMediator getMediator() {
+		return mMediator;
 	}
 
 }

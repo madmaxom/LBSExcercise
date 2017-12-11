@@ -20,7 +20,7 @@ public class ContextMgmtComponent extends IComponent {
 	private ContextMgmtComponent mSelf = this;
 
 	public ContextMgmtComponent(IMediator mediator, String name) {
-		super(mediator, name);
+		super(mediator, name != null && "".equals(name) ? "CTX" : name);
 		mSituation = new ContextSituation();
 		
 		mCtxModel = new CtxModel();

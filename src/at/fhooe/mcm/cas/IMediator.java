@@ -13,5 +13,5 @@ public interface IMediator {
 	public void notifyComponents(ContextElement contextElement, IComponent origin);
 	public void notifyComponents(ContextSituation contextSituation, IComponent origin);
 	public void notifyComponents(RuleEvaluator ruleEvaluator, IComponent origin);
-
+	public void initComponents(String filename);
 }

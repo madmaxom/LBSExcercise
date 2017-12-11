@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../src/at/fhooe/mcm/cas/componentCompositionDataModel/ComponentComposition.xsd">
+  <component name="at.fhooe.mcm.cas.GISComponent"></component>
+  <component name="at.fhooe.mcm.cas.AALComponent"></component>
+  <component name="at.fhooe.mcm.cas.GPSComponent"></component>
+  <component name="at.fhooe.mcm.cas.POIComponent"></component>
+  <component name="at.fhooe.mcm.cas.ContextMgmtComponent"></component>
+  <component name="at.fhooe.mcm.cas.RuleComponent"></component>
+</components>

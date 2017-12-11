@@ -25,7 +25,7 @@ public class GISComponent extends IComponent {
 	private GISView mView;
 
 	public GISComponent(IMediator mediator, String name) {
-		super(mediator, name);
+		super(mediator, name != null && "".equals(name) ? "GIS" : name);
 			
 		mGISModel = new GISModel();
 		GISController c = new GISController(mGISModel);

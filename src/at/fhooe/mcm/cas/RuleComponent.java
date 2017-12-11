@@ -18,7 +18,7 @@ public class RuleComponent extends IComponent implements RuleModelObserver {
 	
 
 	public RuleComponent(IMediator mediator, String name) {
-		super(mediator, name);
+		super(mediator, name != null && "".equals(name) ? "Rule" : name);
 		
 		RuleModel m = new RuleModel();
 		m.addObserver(this);
