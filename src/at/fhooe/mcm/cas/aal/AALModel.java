@@ -41,7 +41,7 @@ public class AALModel {
 		mMode = ParserMode.DOM;
 		createParser(mMode);
 		mFileStructure = FILE_STRUCTURE_XML;
-		mFileSytemPath = "files/";
+		mFileSytemPath = "files/contextelements/";
 		mServerPath = "http://localhost/files/";
 
 	}

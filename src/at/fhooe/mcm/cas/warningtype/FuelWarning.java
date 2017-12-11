@@ -9,7 +9,7 @@ public class FuelWarning extends IWarningType {
 	
 	public FuelWarning() {
 		try {
-			image = ImageIO.read(new File("warning/fuel.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "fuel.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

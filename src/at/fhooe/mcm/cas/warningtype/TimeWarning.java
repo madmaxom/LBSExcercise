@@ -9,7 +9,7 @@ public class TimeWarning extends IWarningType {
 
 	public TimeWarning() {
 		try {
-			image = ImageIO.read(new File("warning/time.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "time.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

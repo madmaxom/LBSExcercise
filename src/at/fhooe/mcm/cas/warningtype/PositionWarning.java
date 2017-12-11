@@ -9,7 +9,7 @@ public class PositionWarning extends IWarningType {
 
 	public PositionWarning() {
 		try {
-			image = ImageIO.read(new File("warning/position.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "position.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

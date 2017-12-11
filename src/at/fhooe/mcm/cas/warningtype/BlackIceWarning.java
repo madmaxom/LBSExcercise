@@ -9,7 +9,7 @@ public class BlackIceWarning extends IWarningType {
 
 	public BlackIceWarning() {
 		try {
-			image = ImageIO.read(new File("warning/black_ice.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "black_ice.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

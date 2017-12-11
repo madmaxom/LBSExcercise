@@ -9,7 +9,7 @@ package at.fhooe.mcm.cas.gps;
  */
 public class GPSReceiverMain {
 	
-	private static final String FILENAME = "GPS-Log-I.log";
+	private static final String FILENAME = "files/gpslogs/GPS-Log-I.log";
 	private static final int SLEEP = 100; // half a second
 	private static final String FILTER = "GGA";
 

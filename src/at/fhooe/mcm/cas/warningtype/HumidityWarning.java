@@ -9,7 +9,7 @@ public class HumidityWarning extends IWarningType {
 	
 	public HumidityWarning() {
 		try {
-			image = ImageIO.read(new File("warning/humidity.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "humidity.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

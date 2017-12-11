@@ -40,7 +40,7 @@ public class RuleModel {
 		mMode = ParserMode.DOM;
 		createParser(mMode);
 		mFileStructure = FILE_STRUCTURE_XML;
-		mFileSytemPath = "rules/rules.xml";
+		mFileSytemPath = "files/rules/rules.xml";
 
 	}
 

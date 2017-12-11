@@ -77,8 +77,10 @@ public class RuleContainer {
 				return valid;
 			} catch (NodeError e) {
 				e.printStackTrace();
+				return false;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 		}
 		return false;
@@ -96,7 +98,6 @@ public class RuleContainer {
 	}
 
 	public void execute(IComponent comp) {
-		System.out.println(this.getClass().getSimpleName() + ": Execute action " + mAction.toString());
 		
 		try {
 			// Class to call method
@@ -122,7 +123,7 @@ public class RuleContainer {
 			Method m = c.getMethod(mAction.getMethod(), param);
 			m.invoke(comp, values);
 			
-			
+			System.out.println(this.getClass().getSimpleName() + ": Execute action " + mAction.toString());
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

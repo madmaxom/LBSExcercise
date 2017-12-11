@@ -9,7 +9,7 @@ public class HotWarning extends IWarningType {
 
 	public HotWarning() {
 		try {
-			image = ImageIO.read(new File("warning/hot.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "hot.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

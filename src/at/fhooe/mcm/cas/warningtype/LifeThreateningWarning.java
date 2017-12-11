@@ -9,7 +9,7 @@ public class LifeThreateningWarning extends IWarningType {
 	
 	public LifeThreateningWarning() {
 		try {
-			image = ImageIO.read(new File("warning/life_threatening.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "life_threatening.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

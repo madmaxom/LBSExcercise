@@ -22,7 +22,7 @@ import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 
 public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
-	private static final String FILENAME = "logs/GPS-Log-I.log";
+	private static final String FILENAME = "files/gpslogs/GPS-Log-I.log";
 	private static final int SLEEP = 2000; // two seconds
 	private static final String FILTER = "GGA";
 	

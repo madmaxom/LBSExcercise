@@ -32,6 +32,6 @@ public class Main {
 //		mediator.register(conComponent);
 //		mediator.register(ruleComponent);
 		
-		mediator.initComponents("files/XML/ComponentComposition.xml"); //init components from file
+		mediator.initComponents("files/components/ComponentComposition.xml"); //init components from file
 	}
 }

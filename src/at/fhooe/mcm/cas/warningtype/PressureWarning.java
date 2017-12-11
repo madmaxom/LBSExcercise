@@ -9,7 +9,7 @@ public class PressureWarning extends IWarningType {
 
 	public PressureWarning() {
 		try {
-			image = ImageIO.read(new File("warning/pressure.png"));
+			image = ImageIO.read(new File(IMAGE_BASE_PATH + "pressure.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
