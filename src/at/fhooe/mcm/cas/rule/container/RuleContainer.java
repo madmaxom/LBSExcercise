@@ -57,6 +57,11 @@ public class RuleContainer {
 				
 				if (neededElement != null) {
 					ContextElement contextElement = getContextElement(_sit, neededElement);
+					if (contextElement == null) {
+						System.out.println(this.getClass().getSimpleName() + ": no ContextElement found for " + neededElement);
+						return false;
+					} 
+					
 					variableParameters.add(contextElement);
 				} else {
 					// add placeholder
@@ -93,7 +98,6 @@ public class RuleContainer {
 				return c;
 			}
 		}
-		System.out.println(this.getClass().getSimpleName() + ": no ContextElement found for " + neededElement);
 		return null;
 	}
 
