@@ -83,20 +83,7 @@
 </action>
 </rule>
 <rule>
-<condition>distance (position, 48.368981:14.513120) &lt; 500</condition>
-<action>
-<class>at.fhooe.mcm.cas.GISComponent</class>
-<method>setWarning</method>
-<parameters>
-<parameter>
-<type>at.fhooe.mcm.cas.warningtype.IWarningType</type>
-<value>at.fhooe.mcm.cas.warningtype.PositionWarning</value>
-</parameter>
-</parameters>
-</action>
-</rule>
-<rule>
-<condition>distance (48.366937:14.517274, 48.309243:14.287994) &gt; 18000 &amp; distance (48.366937:14.517274, 48.309243:14.287994) &lt; 20000</condition>
+<condition>distance (position, 48.368567666666664:14.5148005) &lt; 5</condition>
 <action>
 <class>at.fhooe.mcm.cas.GISComponent</class>
 <method>setWarning</method>
