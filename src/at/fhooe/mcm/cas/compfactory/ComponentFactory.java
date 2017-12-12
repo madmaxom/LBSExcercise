@@ -3,6 +3,7 @@ package at.fhooe.mcm.cas.compfactory;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,12 +24,17 @@ public class ComponentFactory {
 		List<IComponent> components = new ArrayList();
 		
 		IComponent c;
-		String[] componentNames = new ComponentParser().parse(input);
-		for(String component : componentNames) {
+		List<ComponentInfo> componentInfos = new ComponentParser().parse(input);
+		for(ComponentInfo component : componentInfos) {
 			c = null;
 			try {
-				c = (IComponent)Class.forName(component)
+				Class <?> clazz = Class.forName(component.getName());
+				c = (IComponent)clazz
 						.getConstructor(IMediator.class, String.class).newInstance(null, "");
+				if(component.getDrawingContext() != null && !component.getDrawingContext().equals("")) {
+					Method m = clazz.getMethod("setDrawingContext", String.class);
+					m.invoke(c, component.getDrawingContext());
+				}
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();
 			}

@@ -50,6 +50,8 @@ public class ContextMgmtComponent extends IComponent {
 			}
 		}).start();
 	}
+	
+	public void setDrawingContext(String s) {}
 
 	@Override
 	public void onGeoObjectUpdated(GeoObject geoObject) {

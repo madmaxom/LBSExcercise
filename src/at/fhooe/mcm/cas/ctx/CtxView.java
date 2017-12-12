@@ -13,6 +13,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeListener;
 
+import at.fhooe.mcm.cas.IUIView;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.contexttype.ContextFuel;
 import at.fhooe.mcm.cas.contexttype.ContextHumidity;
@@ -84,7 +85,7 @@ public class CtxView implements CtxObserver {
 		dateSpinner.setName("TimeOfTheDay");
 		mOverallPanel.add((java.awt.Component)dateSpinner);
 		
-		Label temperature = new Label("Temperature[°C]");
+		Label temperature = new Label("Temperature[ï¿½C]");
 		mOverallPanel.add(temperature);
 		JSpinner tempSpinner = new JSpinner();
 		tempSpinner.setModel(new SpinnerNumberModel(1,-50,+50,1));

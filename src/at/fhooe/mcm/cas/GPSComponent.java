@@ -29,12 +29,13 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 	private static final String FILTER = "GGA";
 	
 	private Panel mPanel;
+	private GPSReceiverView v;
 	
 	public GPSComponent(IMediator mediator, String name) {
 		super(mediator, name != null && "".equals(name) ? "GPS" : name);
 
 		GPSReceiverController c = new GPSReceiverController();
-		GPSReceiverView v = new GPSReceiverView(c);
+		v = new GPSReceiverView(c);
 		
 		mPanel = v.getPanel();
 		
@@ -55,6 +56,10 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 		}
 	}
 	
+
+	public void setDrawingContext(String s) {
+		v.setDrawingContext(s);
+	}
 	
 	@Override
 	public Panel getView() {

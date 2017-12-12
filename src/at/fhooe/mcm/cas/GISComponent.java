@@ -42,6 +42,9 @@ public class GISComponent extends IComponent {
 		mGISModel.addObserver(mView);
 	}
 	
+
+	public void setDrawingContext(String s) {}
+	
 	@Override
 	public Panel getView() {
 		return mPanel;

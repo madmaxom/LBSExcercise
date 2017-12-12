@@ -31,6 +31,8 @@ public class AALComponent extends IComponent implements AALModelObserver {
 		mPanel = v.getPanel();
 
 	}
+	
+	public void setDrawingContext(String s) {}
 
 	@Override
 	public void onGeoObjectUpdated(GeoObject geoObject) {

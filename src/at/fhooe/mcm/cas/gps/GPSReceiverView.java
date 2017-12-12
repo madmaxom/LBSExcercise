@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Panel;
 
+import at.fhooe.mcm.cas.IUIView;
+
 
 /**
  * Basic view. Is the main window and includes all subviews.
@@ -62,5 +64,9 @@ public class GPSReceiverView implements PositionUpdateListener {
 
 	public Panel getPanel() {
 		return mOverallPanel;
+	}
+	
+	public void setDrawingContext(String str) {
+		mSatView.setDrawingContext(str);
 	}
 }

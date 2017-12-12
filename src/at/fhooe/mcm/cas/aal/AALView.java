@@ -10,7 +10,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class AALView {
+import at.fhooe.mcm.cas.IUIView;
+
+public class AALView{
 
 	private Panel mPanel;
 	private AALController mController;
@@ -53,7 +55,6 @@ public class AALView {
 		mPanel.add(radioPanel, FlowLayout.LEFT);
 	}
 	
-
 	public Panel getPanel() {
 		return mPanel;
 	}

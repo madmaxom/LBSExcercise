@@ -28,6 +28,8 @@ public class RuleComponent extends IComponent implements RuleModelObserver {
 		
 	}
 
+	public void setDrawingContext(String s) {}
+	
 	@Override
 	public void onGeoObjectUpdated(GeoObject geoObject) {
 		// TODO Auto-generated method stub

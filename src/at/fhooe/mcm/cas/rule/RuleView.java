@@ -4,6 +4,8 @@ import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Panel;
 
+import at.fhooe.mcm.cas.IUIView;
+
 public class RuleView {
 	private Panel mPanel;
 	private RuleController mController;
@@ -22,7 +24,6 @@ public class RuleView {
 		mPanel.add(btnLoadFileSystem, FlowLayout.LEFT);
 	}
 	
-
 	public Panel getPanel() {
 		return mPanel;
 	}

@@ -11,6 +11,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import at.fhooe.mcm.cas.IUIView;
+
 
 public class POIView {
 

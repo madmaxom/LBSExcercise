@@ -24,9 +24,10 @@ public class SatView extends Panel {
 	 * Radius of circle drawn from the middle
 	 */
 	private static final int RADIUS = 200;
-	private static final Color SAT_VISIBLE = Color.orange;
-	private static final Color SAT_USED_FOR_CALC = Color.green;
-	private static final Color SAT_NOT_VALID = Color.red;
+	private Color SAT_VISIBLE = Color.orange;
+	private Color SAT_USED_FOR_CALC = Color.green;
+	private Color SAT_NOT_VALID = Color.red;
+	private Color DRAW_COLOR = Color.black;
 	
 	/**
 	 * Satellite position on the view.
@@ -51,7 +52,7 @@ public class SatView extends Panel {
 	
 	@Override
 	public void paint(Graphics _g) {
-		_g.setColor(Color.black);
+		_g.setColor(DRAW_COLOR);
 		
 		// point in the middle
 		Rectangle bound = this.getBounds();
@@ -128,6 +129,18 @@ public class SatView extends Panel {
 		Rectangle bound = this.getBounds();
 		Point p = new Point((int)(x + bound.getCenterX()), (int)(y * (-1) + bound.getCenterY()));
 		return p;
+	}
+	
+	public void setDrawingContext(String str) {
+		switch(str) {
+			case "DAY":
+				DRAW_COLOR = Color.black;
+				break;
+			case "NIGHT":
+				DRAW_COLOR = Color.white;
+				break;
+		}
+		repaint();
 	}
 	
 }

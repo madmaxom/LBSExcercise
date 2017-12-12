@@ -13,8 +13,8 @@ import org.w3c.dom.NodeList;
 
 public class ComponentParser {
 
-	public String[] parse(String input) {
-		List<String> elements = new ArrayList<String>();
+	public List<ComponentInfo> parse(String input) {
+		List<ComponentInfo> elements = new ArrayList<>();
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new ByteArrayInputStream(input.getBytes()), "UTF-8");
@@ -24,15 +24,19 @@ public class ComponentParser {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					String name = eElement.getAttribute("name");
-					if(name != null && !"".equals(name))
-						elements.add(name);
+					String drawingContext = eElement.getAttribute("drawingContext");
+					if(!isEmptyString(name)) {
+						elements.add(new ComponentInfo(name, drawingContext));
+					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(elements.size() > 0)
-			return elements.toArray(new String[] {});
-		else return null;
+		return elements;
+	}
+	
+	private static boolean isEmptyString(String s) {
+		return s == null || "".equals(s);
 	}
 }

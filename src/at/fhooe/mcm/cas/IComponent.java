@@ -21,5 +21,6 @@ public abstract class IComponent implements CommunicationObserver {
 	}
 	
 	public abstract Panel getView();
-	
+
+	public abstract void setDrawingContext(String s);
 }

@@ -60,6 +60,8 @@ public class POIComponent extends IComponent {
 		}).start();
 	}
 	
+	public void setDrawingContext(String s) {}
+	
 	@Override
 	public Panel getView() {
 		return mPanel;

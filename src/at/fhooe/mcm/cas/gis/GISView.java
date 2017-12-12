@@ -18,6 +18,7 @@ import java.awt.TextField;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import at.fhooe.mcm.cas.IUIView;
 import at.fhooe.mcm.cas.warningtype.IWarningType;
 
 
