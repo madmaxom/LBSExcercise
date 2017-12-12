@@ -57,12 +57,6 @@ public class AALComponent extends IComponent implements AALModelObserver {
 	}
 
 	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void update(ContextElement contextElement) {
 		// notify mediator
 		mMediator.notifyComponents(contextElement, this);

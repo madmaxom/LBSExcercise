@@ -1,15 +1,22 @@
 package at.fhooe.mcm.cas;
 
 
+import java.awt.Panel;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Panel;
+import java.util.Vector;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
+import at.fhooe.mcm.cas.contexttype.ContextPosition;
 import at.fhooe.mcm.cas.gis.GISController;
 import at.fhooe.mcm.cas.gis.GISModel;
 import at.fhooe.mcm.cas.gis.GISView;
+import at.fhooe.mcm.cas.gis.POIObject;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
+import at.fhooe.mcm.cas.gis.geomodel.ObjectPart;
+import at.fhooe.mcm.cas.gis.geomodel.PointObject;
 import at.fhooe.mcm.cas.rule.container.RuleContainer;
 import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 import at.fhooe.mcm.cas.warningtype.IWarningType;
@@ -44,10 +51,6 @@ public class GISComponent extends IComponent {
 		super.mMediator.notifyComponents(geoObject, this);
 	}
 	
-	public void updateComponents(GPSPosition contextElement) {
-		super.mMediator.notifyComponents(contextElement, this);
-	}
-	
 	public void updateComponents(ContextSituation contextSituation) {
 		super.mMediator.notifyComponents(contextSituation, this);
 	}
@@ -59,11 +62,6 @@ public class GISComponent extends IComponent {
 	}
 
 	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
-		//location of gps component is received
-	}
-
-	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
 		mContextSituation = contextSituation;
 		checkRules();
@@ -71,7 +69,20 @@ public class GISComponent extends IComponent {
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
-		
+		if(contextElement instanceof ContextPosition) {
+			ContextPosition cp = (ContextPosition) contextElement;
+			CoordinateConversion cc = new CoordinateConversion();
+//			String coords = cc.latLon2UTM(48.2211599, 14.3089029);
+			String coords = cc.latLon2UTM(cp.getxValue(), cp.getyValue());
+			String[] coordParts = coords.split(" ");
+			Point p = new Point();
+			p.setLocation(Integer.parseInt(coordParts[2]), Integer.parseInt(coordParts[3]));// 1756760, 6026187
+			Vector<ObjectPart> parts = new Vector<ObjectPart>();
+			GeoObject[] POIs = new GeoObject[2];
+			parts.addElement(new PointObject(new Point((int)p.getX(), (int)p.getY())));
+			POIs[0] = new POIObject("", 0, parts, 6);
+			mGISModel.addGeoObject(POIs[0]);
+		}
 	}
 
 	@Override

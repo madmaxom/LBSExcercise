@@ -85,14 +85,14 @@ public class Mediator implements IMediator, WindowListener{
 		}
 	}
 
-	@Override
-	public void notifyComponents(GPSPosition gpsPosition, IComponent origin) {
-		for(IComponent icomp: iset) {
-			if(!icomp.getName().equals(origin.getName())) {
-				icomp.onGPSPositionUpdated(gpsPosition);
-			}
-		}
-	}
+//	@Override
+//	public void notifyComponents(GPSPosition gpsPosition, IComponent origin) {
+//		for(IComponent icomp: iset) {
+//			if(!icomp.getName().equals(origin.getName())) {
+//				icomp.onGPSPositionUpdated(gpsPosition);
+//			}
+//		}
+//	}
 
 	@Override
 	public void notifyComponents(ContextSituation contextSituation, IComponent origin) {

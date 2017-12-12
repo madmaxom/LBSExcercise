@@ -184,7 +184,8 @@ public class DrawingContext {
 			// check if it is a POI object
 			if (_obj instanceof POIObject) {
 				POIObject poiObj = (POIObject) _obj;
-
+				// draw icon
+				Rectangle bounds = _obj.getBounds();
 				String filename = null;
 				switch (poiObj.getPOIType()) {
 				case 0: {
@@ -207,6 +208,17 @@ public class DrawingContext {
 					filename = "icon5.png";
 					break;
 				}
+				case 5: {
+					filename = "icon6.png";
+					break;
+				}
+				case 6: {
+					filename = "map-pin-red.png";
+					bounds.x += 1115000;
+					bounds.y += 770000;
+					//1706760,6096187
+					break;
+				}
 				default: {
 					filename = "icon1.png";
 					break;
@@ -222,8 +234,6 @@ public class DrawingContext {
 					e.printStackTrace();
 				}
 
-				// draw icon
-				Rectangle bounds = _obj.getBounds();
 				Point p = _matrix.multiply(new Point(bounds.x, bounds.y));
 				_g.drawImage(image, p.x, p.y, null);
 			}

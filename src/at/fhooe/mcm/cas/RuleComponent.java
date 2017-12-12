@@ -2,7 +2,6 @@ package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
 
-
 import at.fhooe.mcm.cas.aal.parser.ParserMode;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
@@ -37,12 +36,6 @@ public class RuleComponent extends IComponent implements RuleModelObserver {
 
 	@Override
 	public void onContextElementUpdated(ContextElement contextElement) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
 		// TODO Auto-generated method stub
 
 	}

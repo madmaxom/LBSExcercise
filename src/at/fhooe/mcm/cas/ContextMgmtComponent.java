@@ -73,12 +73,6 @@ public class ContextMgmtComponent extends IComponent {
 	}
 
 	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
 		// TODO Auto-generated method stub
 		

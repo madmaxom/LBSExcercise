@@ -584,11 +584,23 @@ public class GISModel {
 	}
 	
 	public void addGeoObject(GeoObject geoObject) {
-		if(geoObject instanceof POIObject)
-			mPOIObjects.add(geoObject);
-		else
+		if(geoObject instanceof POIObject) {
+			addPOIObject((POIObject) geoObject);
+//			mPOIObjects.add(geoObject);
+		} else
 			mOrigGeoObjects.addElement(geoObject);
 		drawAllGeoObjects();
 		notifyObservers();
+	}
+	
+	private void addPOIObject(POIObject poiObject) {
+		for (GeoObject po : mPOIObjects) {
+			if(((POIObject)po).getPOIType() == poiObject.getPOIType()) {
+				mPOIObjects.remove(po);
+				mPOIObjects.add(poiObject);
+				return;
+			}
+		}
+		mPOIObjects.add(poiObject);
 	}
 }

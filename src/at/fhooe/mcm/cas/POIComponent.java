@@ -71,11 +71,6 @@ public class POIComponent extends IComponent {
 	}
 
 	@Override
-	public void onGPSPositionUpdated(GPSPosition contextElement) {
-		
-	}
-
-	@Override
 	public void onContextSituationUpdated(ContextSituation contextSituation) {
 		
 	}

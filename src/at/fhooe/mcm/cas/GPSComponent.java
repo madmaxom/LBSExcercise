@@ -1,6 +1,7 @@
 package at.fhooe.mcm.cas;
 
 import java.awt.Panel;
+import java.awt.Point;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ import at.fhooe.mcm.cas.rule.container.RuleEvaluator;
 public class GPSComponent extends IComponent implements CommunicationObserver, PositionUpdateListener {
 
 	private static final String FILENAME = "files/gpslogs/GPS-Log-I.log";
-	private static final int SLEEP = 200; // ms
+	private static final int SLEEP = 1000; // ms
 	private static final String FILTER = "GGA";
 	
 	private Panel mPanel;
@@ -111,7 +112,6 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 			s.close();
 			conn.close();
 			if (super.mMediator != null) {
-				super.mMediator.notifyComponents(new GPSPosition(_info.getLat(), _info.getLng()), this);
 				ContextPosition cp = new ContextPosition("", _info.getLat(), _info.getLng());
 				mMediator.notifyComponents(cp, this);
 			}
@@ -126,14 +126,6 @@ public class GPSComponent extends IComponent implements CommunicationObserver, P
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	@Override
-	public void onGPSPositionUpdated(GPSPosition gpsPosition) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public void onRuleEvaluatorUpdated(RuleEvaluator ruleEvaluator) {
