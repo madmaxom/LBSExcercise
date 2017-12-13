@@ -25,8 +25,9 @@ public class ComponentParser {
 					Element eElement = (Element) nNode;
 					String name = eElement.getAttribute("name");
 					String drawingContext = eElement.getAttribute("drawingContext");
+					String uiView = eElement.getAttribute("uiView");
 					if(!isEmptyString(name)) {
-						elements.add(new ComponentInfo(name, drawingContext));
+						elements.add(new ComponentInfo(name, drawingContext, uiView));
 					}
 				}
 			}

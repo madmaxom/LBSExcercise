@@ -15,6 +15,13 @@ import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Rectangle;
 import java.awt.TextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -29,7 +36,7 @@ import at.fhooe.mcm.cas.warningtype.IWarningType;
  * @author Oliver
  *
  */
-public class GISView implements DataObserver {
+public class GISViewPedastrian extends AbstractGISView{
 
 	/**
 	 * Color for drawing drag rectangle.
@@ -54,20 +61,8 @@ public class GISView implements DataObserver {
 	 * TextField which shows map scale value.
 	 */
 	TextField mTextFieldMapScale;
-	/**
-	 * Controller which reacts on events.
-	 */
-	GISController mController;
-		
-	/**
-	 * Constructor, initializes member variables.
-	 * @param _c Controller for events
-	 */
-	public GISView(GISController _c) {
-		mController = _c;
-		createPanel();
-	}
 	
+	@Override
 	public Panel getPanel() {
 		return mOverallPanel;
 	}
@@ -75,6 +70,7 @@ public class GISView implements DataObserver {
 	/**
 	 * Creates frame with panel and button, and sets some listeners.
 	 */
+	@Override
 	public void createPanel() {
 	
 		mOverallPanel = new Panel(new BorderLayout());
@@ -84,7 +80,7 @@ public class GISView implements DataObserver {
 		Panel panelLoad = new Panel(new FlowLayout());
 		Button btnLoadData = new Button("Load data");
 		btnLoadData.setName("btnLoadData");
-		btnLoadData.setBackground(Color.cyan);
+		btnLoadData.setBackground(Color.blue);
 		panelLoad.add(btnLoadData);
         Choice chServer = new Choice();
         chServer.setName("chServer");
@@ -97,15 +93,19 @@ public class GISView implements DataObserver {
         panelLoad.add(cbSticky);
         Button btnStore = new Button("Store");
         btnStore.setName("btnStore");
+        btnStore.setBackground(Color.blue);
         panelLoad.add(btnStore);
 		
 		Panel panelZoom = new Panel(new FlowLayout());
 		Button btnZTF = new Button("ZTF");
 		btnZTF.setName("btnZTF");
+		btnZTF.setBackground(Color.blue);
 		Button btnZoomIn = new Button("+");
 		btnZoomIn.setName("btnZoomIn");
+		btnZoomIn.setBackground(Color.blue);
 		Button btnZoomOut = new Button("-");
 		btnZoomOut.setName("btnZoomOut");
+		btnZoomOut.setBackground(Color.blue);
 		panelZoom.add(btnZTF);
 		panelZoom.add(btnZoomIn);
 		panelZoom.add(btnZoomOut);
@@ -113,12 +113,16 @@ public class GISView implements DataObserver {
 		Panel panelScroll = new Panel(new GridBagLayout());
 		Button btnScrollUp = new Button("N");
 		btnScrollUp.setName("btnScrollUp");
+		btnScrollUp.setBackground(Color.blue);
 		Button btnScrollDown = new Button("S");
 		btnScrollDown.setName("btnScrollDown");
+		btnScrollDown.setBackground(Color.blue);
 		Button btnScrollLeft = new Button("W");
 		btnScrollLeft.setName("btnScrollLeft");
+		btnScrollLeft.setBackground(Color.blue);
 		Button btnScrollRight = new Button("E");
 		btnScrollRight.setName("btnScrollRight");
+		btnScrollRight.setBackground(Color.blue);
 		panelScroll.add(btnScrollUp);
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -149,9 +153,11 @@ public class GISView implements DataObserver {
 		Panel panelRotate = new Panel(new FlowLayout());
 		Button btnRotateLeft = new Button("Rotate left");
 		btnRotateLeft.setName("btnRotateLeft");
+		btnRotateLeft.setBackground(Color.blue);
 		panelRotate.add(btnRotateLeft);
 		Button btnRotateRight = new Button("Rotate right");
 		btnRotateRight.setName("btnRotateRight");
+		btnRotateRight.setBackground(Color.blue);
 		panelRotate.add(btnRotateRight);
 		
 		Panel panelMapScale = new Panel(new FlowLayout());
@@ -162,6 +168,7 @@ public class GISView implements DataObserver {
 	    
 	    Button btnEnablePOI = new Button("POI");
 	    btnEnablePOI.setName("btnEnablePOI");
+	    btnEnablePOI.setBackground(Color.blue);
 
 		// add panels to panel
 		Panel panelButtons = new Panel(new FlowLayout());
@@ -179,27 +186,28 @@ public class GISView implements DataObserver {
 		mOverallPanel.add(panelButtons, BorderLayout.SOUTH);
 		
 		// add listeners
-		btnLoadData.addActionListener(mController);
-		btnZTF.addActionListener(mController);
-		btnZoomIn.addActionListener(mController);
-		btnZoomOut.addActionListener(mController);
-		btnScrollDown.addActionListener(mController);
-		btnScrollLeft.addActionListener(mController);
-		btnScrollRight.addActionListener(mController);
-		btnScrollUp.addActionListener(mController);
-		btnRotateLeft.addActionListener(mController);
-		btnRotateRight.addActionListener(mController);
-		btnEnablePOI.addActionListener(mController);
-		btnStore.addActionListener(mController);
-		chServer.addItemListener(mController);
-		cbSticky.addItemListener(mController);
+		btnLoadData.addActionListener(actionListener);
+		btnZTF.addActionListener(actionListener);
+		btnZoomIn.addActionListener(actionListener);
+		btnZoomOut.addActionListener(actionListener);
+		btnScrollDown.addActionListener(actionListener);
+		btnScrollLeft.addActionListener(actionListener);
+		btnScrollRight.addActionListener(actionListener);
+		btnScrollUp.addActionListener(actionListener);
+		btnRotateLeft.addActionListener(actionListener);
+		btnRotateRight.addActionListener(actionListener);
+		btnEnablePOI.addActionListener(actionListener);
+		btnStore.addActionListener(actionListener);
 		
-		mDrawingPanel.addComponentListener(mController);
-		mDrawingPanel.addMouseListener(mController);
-		mDrawingPanel.addMouseWheelListener(mController);
-		mDrawingPanel.addMouseMotionListener(mController);
-		mTextFieldMapScale.addActionListener(mController);
-		mDrawingPanel.addKeyListener(mController);
+		chServer.addItemListener(itemListener);
+		cbSticky.addItemListener(itemListener);
+		
+		mDrawingPanel.addComponentListener(componentListener);
+		mDrawingPanel.addMouseListener(mouseListener);
+		mDrawingPanel.addMouseWheelListener(mouseWheelListener);
+		mDrawingPanel.addMouseMotionListener(mouseMotionListener);
+		mTextFieldMapScale.addActionListener(actionListener);
+		mDrawingPanel.addKeyListener(keyListener);
 
 	}
 	
@@ -207,6 +215,7 @@ public class GISView implements DataObserver {
 	 * Draws a rectangle in XOR-mode on the buffered image.
 	 * @param _rect Rectangle to set
 	 */
+	@Override
 	public void drawRect(Rectangle _rect) {
 		eraseOldRect();
 		mDragRect = _rect;
@@ -219,6 +228,7 @@ public class GISView implements DataObserver {
 	/**
 	 * Erases old visible rectangle from buffered image.
 	 */
+	@Override
 	public void eraseOldRect() {
 		if (mDragRect != null) {
 			Graphics g = mDrawingPanel.getGraphics();
@@ -229,6 +239,7 @@ public class GISView implements DataObserver {
 		}
 	}
 	
+	@Override
 	public void dragCopy(int _deltaX, int _deltaY) {
 		// fast copying
 		Graphics g = mDrawingPanel.getGraphics();
@@ -251,11 +262,13 @@ public class GISView implements DataObserver {
 	public void update(int _mapScale) {
 		mTextFieldMapScale.setText(String.valueOf(_mapScale));
 	}
-
+	
+	@Override
 	public void setWarning(List<IWarningType> warningTypes) {
 		mPanelWarnings.drawWarnings(warningTypes);
 	}
 	
+	@Override
 	public void removeWarnings() {
 		// clear list
 		mPanelWarnings.removeWarnings();

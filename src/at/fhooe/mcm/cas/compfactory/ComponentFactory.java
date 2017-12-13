@@ -12,6 +12,7 @@ import java.util.List;
 
 import at.fhooe.mcm.cas.IComponent;
 import at.fhooe.mcm.cas.IMediator;
+import at.fhooe.mcm.cas.IUIView;
 import at.fhooe.mcm.cas.aal.parser.IContextParser;
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 
@@ -29,9 +30,15 @@ public class ComponentFactory {
 			c = null;
 			try {
 				Class <?> clazz = Class.forName(component.getName());
-				c = (IComponent)clazz
-						.getConstructor(IMediator.class, String.class).newInstance(null, "");
-				if(component.getDrawingContext() != null && !component.getDrawingContext().equals("")) {
+				if(!isEmptyString(component.getUiView())) {
+					Class<?> uiViewClass = Class.forName(component.getUiView());
+					IUIView uiview = (IUIView) uiViewClass.getConstructor().newInstance();
+					c = (IComponent)clazz.getConstructor(IMediator.class, String.class, IUIView.class).newInstance(null,"", uiview);
+				}else {
+					c = (IComponent)clazz
+							.getConstructor(IMediator.class, String.class).newInstance(null, "");	
+				}
+				if(!isEmptyString(component.getDrawingContext())) {
 					Method m = clazz.getMethod("setDrawingContext", String.class);
 					m.invoke(c, component.getDrawingContext());
 				}
@@ -55,5 +62,9 @@ public class ComponentFactory {
 			e.printStackTrace();
 		}
 		return componentComposition;
+	}
+	
+	private static boolean isEmptyString(String s) {
+		return s == null || "".equals(s);
 	}
 }

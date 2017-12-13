@@ -72,7 +72,7 @@ public class GISController extends WindowAdapter
 	/**
 	 * View
 	 */
-	private GISView mView;
+	private AbstractGISView mView;
 
 	private boolean mCtrlKeyPressed;
 
@@ -104,7 +104,7 @@ public class GISController extends WindowAdapter
 	 * Needed for selection (visible rectangle) and faster dragging.
 	 * @param _v
 	 */
-	public void addView(GISView _v) {
+	public void addView(AbstractGISView _v) {
 		mView = _v;
 	}
 

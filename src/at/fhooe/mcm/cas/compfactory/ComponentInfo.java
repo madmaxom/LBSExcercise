@@ -3,10 +3,12 @@ package at.fhooe.mcm.cas.compfactory;
 public class ComponentInfo {
 	private String name;
 	private String drawingContext;
+	private String uiView;
 	
-	public ComponentInfo(String name, String drawingContext) {
+	public ComponentInfo(String name, String drawingContext, String uiView) {
 		this.name = name;
 		this.drawingContext = drawingContext;
+		this.uiView = uiView;
 	}
 
 	public String getName() {
@@ -15,5 +17,9 @@ public class ComponentInfo {
 
 	public String getDrawingContext() {
 		return drawingContext;
+	}
+
+	public String getUiView() {
+		return uiView;
 	}
 }

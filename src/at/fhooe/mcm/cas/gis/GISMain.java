@@ -15,7 +15,15 @@ public class GISMain {
 		
 		GISModel m = new GISModel();
 		GISController c = new GISController(m);
-		GISView v = new GISView(c);
+		GISViewPedastrian v = new GISViewPedastrian();
+		v.setActionListener(c);
+		v.setComponentListener(c);
+		v.setItemListener(c);
+		v.setKeyListener(c);
+		v.setMouseListener(c);
+		v.setMouseMotionListener(c);
+		v.setMouseWheelListener(c);
+		v.createPanel();
 		c.addView(v);
 
 		m.addObserver(v);

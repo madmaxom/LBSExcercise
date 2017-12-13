@@ -10,9 +10,10 @@ import java.util.Vector;
 
 import at.fhooe.mcm.cas.contexttype.ContextElement;
 import at.fhooe.mcm.cas.contexttype.ContextPosition;
+import at.fhooe.mcm.cas.gis.AbstractGISView;
 import at.fhooe.mcm.cas.gis.GISController;
 import at.fhooe.mcm.cas.gis.GISModel;
-import at.fhooe.mcm.cas.gis.GISView;
+import at.fhooe.mcm.cas.gis.GISViewPedastrian;
 import at.fhooe.mcm.cas.gis.POIObject;
 import at.fhooe.mcm.cas.gis.geomodel.GeoObject;
 import at.fhooe.mcm.cas.gis.geomodel.ObjectPart;
@@ -29,14 +30,26 @@ public class GISComponent extends IComponent {
 	private ContextSituation mContextSituation;
 	private RuleEvaluator mRuleEvaluator;
 	
-	private GISView mView;
+	private AbstractGISView mView;
 
 	public GISComponent(IMediator mediator, String name) {
+		this(mediator, name, new GISViewPedastrian());
+	}
+	
+	public GISComponent(IMediator mediator, String name, IUIView view) {
 		super(mediator, name != null && "".equals(name) ? "GIS" : name);
-			
+		
 		mGISModel = new GISModel();
 		GISController c = new GISController(mGISModel);
-		mView = new GISView(c);
+		mView = (AbstractGISView) view;
+		mView.setActionListener(c);
+		mView.setComponentListener(c);
+		mView.setItemListener(c);
+		mView.setKeyListener(c);
+		mView.setMouseListener(c);
+		mView.setMouseMotionListener(c);
+		mView.setMouseWheelListener(c);
+		mView.createPanel();
 		mPanel = mView.getPanel();
 		c.addView(mView);
 		mGISModel.addObserver(mView);

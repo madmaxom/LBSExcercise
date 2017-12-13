@@ -19,6 +19,7 @@ public abstract class IComponent implements CommunicationObserver {
 	public String getName() {
 		return mName;
 	}
+	public void setUI(IUIView iuiview) {}
 	
 	public abstract Panel getView();
 
